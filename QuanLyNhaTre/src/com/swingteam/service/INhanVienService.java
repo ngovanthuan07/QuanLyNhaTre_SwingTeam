@@ -5,10 +5,14 @@
  */
 package com.swingteam.service;
 
+import com.swingteam.model.NhanVienModel;
+import java.util.List;
+
 /**
  *
  * @author ngova
  */
 public interface INhanVienService {
-    
+   List<NhanVienModel> findAll();  
+   String save(NhanVienModel nhanVienModel);
 }

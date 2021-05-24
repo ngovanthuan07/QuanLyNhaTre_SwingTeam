@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author ngova
  */
-public class ChucVuDAO extends AbstractDAO<ChucVuModel> implements IChucVuDAO{
+public class ChucVuDAO extends AbstractDAO<ChucVuModel> implements IChucVuDAO {
 
     @Override
     public List<ChucVuModel> finAll() {
@@ -26,7 +26,21 @@ public class ChucVuDAO extends AbstractDAO<ChucVuModel> implements IChucVuDAO{
     @Override
     public String save(ChucVuModel chucVuModel) {
         String sql = "insert into ChucVu(maChucVu,tenChucVu) values (?,?)";
-        return (String) insert(sql, chucVuModel.getMaChucVu(),chucVuModel.getTenChucVu());
+        return (String) insert(sql, chucVuModel.getMaChucVu(), chucVuModel.getTenChucVu());
     }
-    
+
+    @Override
+    public List<ChucVuModel> findByTenChucVu(String tenChucVu) {
+        String sql = "select * from ChucVu where tenChucVu = ?";
+        List<ChucVuModel> listChucVu = query(sql, new ChucVuMapper(), tenChucVu);
+        return listChucVu.isEmpty() ? null : listChucVu;
+    }
+
+    @Override
+    public List<ChucVuModel> finndByMaChucVu(String maChucVu) {
+        String sql = "select * from ChucVu where maChucVu = ?";
+        List<ChucVuModel> listChucVu = query(sql, new ChucVuMapper(), maChucVu);
+        return listChucVu.isEmpty() ? null : listChucVu;
+    }
+
 }

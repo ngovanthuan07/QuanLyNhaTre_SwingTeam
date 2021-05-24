@@ -32,8 +32,6 @@ set @lastmadh= (select top 1 maChucVu from chucvu order by maChucVu desc)
 update chucvu set maChucVu = dbo.func_nextmadh(@lastmadh,'CV_',7) where maChucVu=''
 end
 go
-insert into ChucVu values('',N'Giáo viên')
-go
 create table BacLuong
 (
 	maBacLuong varchar(20) not null constraint pk_BacLuong primary key(maBacLuong),
@@ -49,7 +47,6 @@ declare @lastmadh varchar(20)
 set @lastmadh= (select top 1 maBacLuong from bacluong order by maBacLuong desc) 
 update bacluong set maBacLuong = dbo.func_nextmadh(@lastmadh,'BL_',7) where maBacLuong=''
 end
-insert into bacluong values('',3,30000000)
 go
 create table NhanVien
 (
@@ -351,4 +348,3 @@ alter table QuanLyBuaAn
 		foreign key(maNhanVien)
 		references NhanVien(maNhanVien)
 go
-
