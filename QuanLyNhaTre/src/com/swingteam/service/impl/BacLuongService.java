@@ -3,29 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swingteam.dao.impl;
+package com.swingteam.service.impl;
 
 import com.swingteam.dao.IBacLuongDAO;
-import com.swingteam.mapper.BacLuongMapper;
+import com.swingteam.dao.impl.BacLuongDAO;
 import com.swingteam.model.BacLuongModel;
+import com.swingteam.service.IBacLuongService;
 import java.util.List;
 
 /**
  *
  * @author ngova
  */
-public class BacLuongDAO extends AbstractDAO<BacLuongModel> implements IBacLuongDAO{
+public class BacLuongService implements IBacLuongService{
+    
+    public IBacLuongDAO iBacLuongDAO;
+    
+    public BacLuongService(){
+        iBacLuongDAO = new BacLuongDAO();
+    }
 
     @Override
     public List<BacLuongModel> finAll() {
-        String sql = "select * from BacLuong";
-        return query(sql, new BacLuongMapper());
+        return iBacLuongDAO.finAll();
     }
 
     @Override
     public int save(BacLuongModel bacLuongModel) {
-        String sql = "insert into BacLuong (heSoBac,mucLuongCanBan) values (?,?)";
-        return (int) insert(sql, bacLuongModel.getHeSoBac(),bacLuongModel.getMucLuongCanBan());
+        return iBacLuongDAO.save(bacLuongModel);
     }
     
 }

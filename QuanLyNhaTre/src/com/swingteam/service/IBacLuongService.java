@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swingteam.dao;
+package com.swingteam.service;
 
 import com.swingteam.model.BacLuongModel;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author ngova
  */
-public interface IBacLuongDAO {
+public interface IBacLuongService {
     List<BacLuongModel> finAll(); 
-    int save(BacLuongModel bacLuongModel);
+    int save(BacLuongModel bacLuongModel);    
 }
