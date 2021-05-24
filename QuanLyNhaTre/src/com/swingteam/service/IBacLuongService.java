@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface IBacLuongService {
     List<BacLuongModel> finAll(); 
-    int save(BacLuongModel bacLuongModel);    
+    String save(BacLuongModel bacLuongModel);    
 }

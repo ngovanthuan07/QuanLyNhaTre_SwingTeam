@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface IChucVuDAO {
     List<ChucVuModel> finAll();
+    String save(ChucVuModel chucVuModel);
 }

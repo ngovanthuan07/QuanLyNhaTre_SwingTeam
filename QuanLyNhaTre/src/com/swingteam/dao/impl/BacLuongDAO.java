@@ -19,13 +19,14 @@ public class BacLuongDAO extends AbstractDAO<BacLuongModel> implements IBacLuong
     @Override
     public List<BacLuongModel> finAll() {
         String sql = "select * from BacLuong";
-        return query(sql, new BacLuongMapper());
+        List<BacLuongModel> listBacLuong = query(sql, new BacLuongMapper());
+        return listBacLuong.isEmpty() ? null : listBacLuong;
     }
 
     @Override
-    public int save(BacLuongModel bacLuongModel) {
-        String sql = "insert into BacLuong (heSoBac,mucLuongCanBan) values (?,?)";
-        return (int) insert(sql, bacLuongModel.getHeSoBac(),bacLuongModel.getMucLuongCanBan());
+    public String save(BacLuongModel bacLuongModel) {
+        String sql = "insert into BacLuong (maBacLuong,heSoBac,mucLuongCanBan) values (?,?,?)";
+        return (String) insert(sql, bacLuongModel.getMaBacLuong(),bacLuongModel.getHeSoBac(),bacLuongModel.getMucLuongCanBan());
     }
     
 }

@@ -21,8 +21,6 @@ public class BacLuongMapper implements RowMapper<BacLuongModel>{
             bl.setMaBacLuong(rs.getString("maBacLuong"));
             bl.setHeSoBac(rs.getInt("heSoBac"));
             bl.setMucLuongCanBan(rs.getLong("mucLuongCanBan"));
-            bl.setTongLuong(rs.getLong("TongLuong"));
-            
             return bl;
         } catch (Exception e) {
             return null;

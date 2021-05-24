@@ -19,7 +19,14 @@ public class ChucVuDAO extends AbstractDAO<ChucVuModel> implements IChucVuDAO{
     @Override
     public List<ChucVuModel> finAll() {
         String sql = "select * from ChucVu";
-        return query(sql, new ChucVuMapper());
+        List<ChucVuModel> listChucVu = query(sql, new ChucVuMapper());
+        return listChucVu.isEmpty() ? null : listChucVu;
+    }
+
+    @Override
+    public String save(ChucVuModel chucVuModel) {
+        String sql = "insert into ChucVu(maChucVu,tenChucVu) values (?,?)";
+        return (String) insert(sql, chucVuModel.getMaChucVu(),chucVuModel.getTenChucVu());
     }
     
 }
