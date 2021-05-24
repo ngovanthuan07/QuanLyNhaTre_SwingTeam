@@ -13,12 +13,12 @@ public class NhanVienModel {
     private String maNhanVien;
     private String tenNhanVien;
     private String ngaySinh;
-    private byte gioiTinh;
+    private int gioiTinh;
     private String cmnd;
     private String ngayVaoLam;
     private String diaChi;
     private String soDienThoai;
-    private byte trangThai;
+    private int trangThai;
     private String ghiChu;
     private String maBacLuong;
     private int heSoBac;
@@ -49,11 +49,11 @@ public class NhanVienModel {
         this.ngaySinh = ngaySinh;
     }
 
-    public byte getGioiTinh() {
+    public int getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(byte gioiTinh) {
+    public void setGioiTinh(int gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -89,11 +89,11 @@ public class NhanVienModel {
         this.soDienThoai = soDienThoai;
     }
 
-    public byte getTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(byte trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
