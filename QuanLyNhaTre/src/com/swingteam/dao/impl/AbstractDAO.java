@@ -15,8 +15,6 @@ import java.util.List;
 
 public class AbstractDAO<T> extends SwinTeamConnect implements GenericDAO<T> {
 
-
-
     @Override
     public <T> List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {
         List<T> results = new ArrayList<>();
