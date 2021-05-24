@@ -18,8 +18,8 @@ public class ChucVuMapper implements RowMapper<ChucVuModel>{
     public ChucVuModel mapRow(ResultSet rs) {
         try {
             ChucVuModel cv = new ChucVuModel();
-            cv.setMaChucVu(rs.getString(""));
-            cv.setTenChucVu(rs.getString(""));
+            cv.setMaChucVu(rs.getString("maChucVu"));
+            cv.setTenChucVu(rs.getString("tenChucVu"));
             return cv;
         } catch (Exception e) {
             return null;

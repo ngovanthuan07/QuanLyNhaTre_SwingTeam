@@ -29,7 +29,7 @@ public class BacLuongService implements IBacLuongService{
     }
 
     @Override
-    public int save(BacLuongModel bacLuongModel) {
+    public String save(BacLuongModel bacLuongModel) {
         return iBacLuongDAO.save(bacLuongModel);
     }
     

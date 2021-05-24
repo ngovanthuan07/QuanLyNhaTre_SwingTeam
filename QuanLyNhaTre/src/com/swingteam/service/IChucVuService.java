@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swingteam.dao;
+package com.swingteam.service;
 
-import com.swingteam.model.BacLuongModel;
+import com.swingteam.model.ChucVuModel;
 import java.util.List;
 
 /**
  *
  * @author ngova
  */
-public interface IBacLuongDAO {
-    List<BacLuongModel> finAll(); 
-    String save(BacLuongModel bacLuongModel);
+public interface IChucVuService {
+    List<ChucVuModel> findAll();
+    String save(ChucVuModel chucVuModel);    
 }
