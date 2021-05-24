@@ -13,20 +13,6 @@ import java.sql.ResultSet;
  * @author ngova
  */
 public class NhanVienMapper implements RowMapper<NhanVienModel>{
-private String maNhanVien;
-    private String tenNhanVien;
-    private String ngaySinh;
-    private byte gioiTinh;
-    private String cmnd;
-    private String ngayVaoLam;
-    private String diaChi;
-    private String soDienThoai;
-    private byte trangThai;
-    private String ghiChu;
-    private String maBacLuong;
-    private int heSoBac;
-    private String maChucVu;
-    private String tenChucVu;
     @Override
     public NhanVienModel mapRow(ResultSet rs) {
         try {
@@ -34,7 +20,7 @@ private String maNhanVien;
             nv.setMaNhanVien(rs.getString("maNhanVien"));
             nv.setTenNhanVien(rs.getString("tenNhanVien"));
             nv.setNgaySinh(rs.getString("ngaySinh"));
-            nv.setGioiTinh(rs.getByte(gioiTinh));
+            nv.setGioiTinh(rs.getByte("gioiTinh"));
             nv.setCmnd(rs.getString("cmnd"));
             nv.setNgayVaoLam(rs.getString("ngayVaoLam"));
             nv.setDiaChi(rs.getString("diaChi"));

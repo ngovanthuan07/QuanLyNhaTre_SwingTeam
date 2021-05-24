@@ -15,4 +15,6 @@ import java.util.List;
 public interface IChucVuDAO {
     List<ChucVuModel> finAll();
     String save(ChucVuModel chucVuModel);
+    List<ChucVuModel> findByTenChucVu(String tenChucVu);
+    List<ChucVuModel> finndByMaChucVu(String maChucVu);
 }

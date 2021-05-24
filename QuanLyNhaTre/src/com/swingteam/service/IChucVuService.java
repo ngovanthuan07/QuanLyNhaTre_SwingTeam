@@ -13,6 +13,12 @@ import java.util.List;
  * @author ngova
  */
 public interface IChucVuService {
+
     List<ChucVuModel> findAll();
-    String save(ChucVuModel chucVuModel);    
+
+    String save(ChucVuModel chucVuModel);
+
+    List<ChucVuModel> findByTenChucVu(String tenChucVu);
+
+    List<ChucVuModel> finndByMaChucVu(String maChucVu);
 }

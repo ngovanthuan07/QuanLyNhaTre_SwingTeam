@@ -20,8 +20,28 @@ public class NhanVienDao extends AbstractDAO<NhanVienModel> implements INhanVien
     public List<com.swingteam.model.NhanVienModel> findAll() {
         String sql = "select * from NhanVien as nv, BacLuong as bl, ChucVu as cv\n"
                 + "where nv.maBacLuong = bl.maBacLuong and nv.maChucVu = cv.maChucVu";
-        
-        return query(sql, new NhanVienMapper());
+        List<NhanVienModel> listNhanVien = query(sql, new NhanVienMapper());
+        return listNhanVien.isEmpty() ? null : listNhanVien;
+    }
+
+    @Override
+    public String save(NhanVienModel nhanVienModel) {
+        String sql = "insert into NhanVien(maNhanVien,tenNhanVien,ngaySinh,gioiTinh,cmnd,ngayVaoLam,diaChi,soDienThoai,trangThai,ghiChu,maBacLuong,maChucVu) "
+                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        return (String) insert(sql, 
+                nhanVienModel.getMaNhanVien(),
+                nhanVienModel.getTenNhanVien(),
+                nhanVienModel.getNgaySinh(),
+                nhanVienModel.getGioiTinh(),
+                nhanVienModel.getCmnd(),
+                nhanVienModel.getNgayVaoLam(),
+                nhanVienModel.getDiaChi(),
+                nhanVienModel.getSoDienThoai(),
+                nhanVienModel.getTrangThai(),
+                nhanVienModel.getGhiChu(),
+                nhanVienModel.getMaBacLuong(),
+                nhanVienModel.getMaChucVu()
+                );
     }
     
 }

@@ -32,5 +32,15 @@ public class ChucVuService implements IChucVuService{
     public String save(ChucVuModel chucVuModel) {
         return iChucVuDAO.save(chucVuModel);
     }
+
+    @Override
+    public List<ChucVuModel> findByTenChucVu(String tenChucVu) {
+        return iChucVuDAO.findByTenChucVu(tenChucVu);
+    }
+
+    @Override
+    public List<ChucVuModel> finndByMaChucVu(String maChucVu) {
+        return iChucVuDAO.finndByMaChucVu(maChucVu);
+    }
     
 }

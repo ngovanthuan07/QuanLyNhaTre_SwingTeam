@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface INhanVienDAO {
     List<NhanVienModel> findAll();
+    String save(NhanVienModel nhanVienModel);
 }
