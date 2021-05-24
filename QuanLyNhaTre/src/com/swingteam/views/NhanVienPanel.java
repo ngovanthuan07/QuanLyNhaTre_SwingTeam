@@ -1176,11 +1176,17 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rbtnNam_NhanVienActionPerformed
 
     private void btnThem_NhanVien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_NhanVien1ActionPerformed
+        if(txtTenNhanVien_NhanVien1.getText().equals("") || txtCmnd_NhanVien.getText().equals("") || txtDiaChi_NhanVien.getText().equals("") || txtSoDT_NhanVien1.getText().equals(""))
+        {
+            ThongBao("Bạn nhập bị thiếu", "Lỗi", 1);
+            return;
+        }
+        
         try {
             nhanVienService = new NhanVienService();
             chucVuService = new ChucVuService();
-            byte gioiTinh = 0;
-            byte trangThai = 1;
+            int gioiTinh = 0;
+            int trangThai = 1;
             NhanVienModel nv = new NhanVienModel();
 
             if (rbtnNam_NhanVien.isSelected()) {
@@ -1188,35 +1194,42 @@ public class NhanVienPanel extends javax.swing.JPanel {
             } else {
                 gioiTinh = 0;
             }
-            nv.setTrangThai(trangThai);
             nv.setMaNhanVien("");
+            
             nv.setTenNhanVien(txtTenNhanVien_NhanVien1.getText());
-            nv.setCmnd(txtCmnd_NhanVien.getText());
-            nv.setDiaChi(txtDiaChi_NhanVien.getText());
-            nv.setSoDienThoai(txtSoDT_NhanVien1.getText());
-            nv.setGhiChu(txtChuThich_NhanVien1.getText());
-            nv.setGioiTinh(gioiTinh);
+            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date = sdf.format(txtNgaySinh_NhanVien.getDate());
             nv.setNgaySinh(date);
+            
+            nv.setGioiTinh(gioiTinh);        
+            
+            nv.setCmnd(txtCmnd_NhanVien.getText());
+            
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
             String date2 = sdf.format(txtNgayVaoLam_NhanVien.getDate());
             nv.setNgayVaoLam(date2);
+            
+            nv.setDiaChi(txtDiaChi_NhanVien.getText());
+            
+            nv.setSoDienThoai(txtSoDT_NhanVien1.getText());
+
+            nv.setTrangThai(trangThai);
+            
+            nv.setGhiChu(txtChuThich_NhanVien1.getText());
 
             List<ChucVuModel> chucvu = chucVuService.findByTenChucVu(cbbChucVu_NhanVien.getSelectedItem().toString().trim());
             if (chucvu != null) {
                 nv.setMaChucVu(chucvu.get(0).getMaChucVu());
             }
             nv.setMaBacLuong(cbbHeSoBacLuong_NhanVien.getSelectedItem().toString().trim());
-
+            
             String index = nhanVienService.save(nv);
             ThongBao("Thêm Thành công", "Thành công", 2);
             nhanVienRender();
-            System.out.println(index);
         } catch (Exception e) {
             System.out.println(e);
-        } finally{
-            
+        } finally{       
             clearNhanVien();
         }
 

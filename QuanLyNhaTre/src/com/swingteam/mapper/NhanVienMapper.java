@@ -20,12 +20,12 @@ public class NhanVienMapper implements RowMapper<NhanVienModel>{
             nv.setMaNhanVien(rs.getString("maNhanVien"));
             nv.setTenNhanVien(rs.getString("tenNhanVien"));
             nv.setNgaySinh(rs.getString("ngaySinh"));
-            nv.setGioiTinh(rs.getByte("gioiTinh"));
+            nv.setGioiTinh(rs.getInt("gioiTinh"));
             nv.setCmnd(rs.getString("cmnd"));
             nv.setNgayVaoLam(rs.getString("ngayVaoLam"));
             nv.setDiaChi(rs.getString("diaChi"));
             nv.setSoDienThoai(rs.getString("soDienThoai"));
-            nv.setTrangThai(rs.getByte("trangThai"));
+            nv.setTrangThai(rs.getInt("trangThai"));
             nv.setGhiChu(rs.getString("ghiChu"));
             nv.setMaBacLuong(rs.getString("maBacLuong"));
             nv.setHeSoBac(rs.getInt("heSoBac"));

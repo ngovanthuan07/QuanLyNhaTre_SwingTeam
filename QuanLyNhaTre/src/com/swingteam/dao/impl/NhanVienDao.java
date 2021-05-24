@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author ngova
  */
-public class NhanVienDao extends AbstractDAO<NhanVienModel> implements INhanVienDAO{
+public class NhanVienDao extends AbstractDAO<NhanVienModel> implements INhanVienDAO {
 
     @Override
     public List<com.swingteam.model.NhanVienModel> findAll() {
@@ -26,22 +26,22 @@ public class NhanVienDao extends AbstractDAO<NhanVienModel> implements INhanVien
 
     @Override
     public String save(NhanVienModel nhanVienModel) {
-        String sql = "insert into NhanVien(maNhanVien,tenNhanVien,ngaySinh,gioiTinh,cmnd,ngayVaoLam,diaChi,soDienThoai,trangThai,ghiChu,maBacLuong,maChucVu) "
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
-        return (String) insert(sql, 
-                nhanVienModel.getMaNhanVien(),
-                nhanVienModel.getTenNhanVien(),
-                nhanVienModel.getNgaySinh(),
-                nhanVienModel.getGioiTinh(),
-                nhanVienModel.getCmnd(),
-                nhanVienModel.getNgayVaoLam(),
-                nhanVienModel.getDiaChi(),
-                nhanVienModel.getSoDienThoai(),
-                nhanVienModel.getTrangThai(),
-                nhanVienModel.getGhiChu(),
-                nhanVienModel.getMaBacLuong(),
-                nhanVienModel.getMaChucVu()
-                );
+        String sql = "insert into NhanVien(maNhanVien,tenNhanVien,ngaySinh,gioiTinh,cmnd,ngayVaoLam,diaChi,soDienThoai,trangThai,ghiChu,maBacLuong,maChucVu)	\n"
+                + "	values(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        String addNV = (String) insert(sql, "", 
+                nhanVienModel.getTenNhanVien(), 
+                nhanVienModel.getNgaySinh(), 
+                nhanVienModel.getGioiTinh(), 
+                nhanVienModel.getCmnd(), 
+                nhanVienModel.getNgayVaoLam(), 
+                nhanVienModel.getDiaChi(), 
+                nhanVienModel.getSoDienThoai(), 
+                nhanVienModel.getTrangThai(), 
+                nhanVienModel.getGhiChu(), 
+                nhanVienModel.getMaBacLuong(), 
+                nhanVienModel.getMaChucVu());
+        return addNV;
     }
-    
+
 }
