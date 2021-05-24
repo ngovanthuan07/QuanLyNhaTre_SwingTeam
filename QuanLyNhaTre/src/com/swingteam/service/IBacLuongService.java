@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swingteam.dao;
+package com.swingteam.service;
+
+import com.swingteam.model.BacLuongModel;
+import java.util.List;
 
 /**
  *
  * @author ngova
  */
-public class INhanVienDao {
-    
+public interface IBacLuongService {
+    List<BacLuongModel> finAll(); 
+    int save(BacLuongModel bacLuongModel);    
 }
