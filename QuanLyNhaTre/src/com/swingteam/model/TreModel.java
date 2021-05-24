@@ -13,7 +13,7 @@ public class TreModel {
     private  String matre;
     private String tentre;
     private String ngaysinh;
-    private byte gioi;
+    private int gioi;
     private String maph;
 
     public String getMatre() {
@@ -40,13 +40,15 @@ public class TreModel {
         this.ngaysinh = ngaysinh;
     }
 
-    public byte getGioi() {
+    public int getGioi() {
         return gioi;
     }
 
-    public void setGioi(byte gioi) {
+    public void setGioi(int gioi) {
         this.gioi = gioi;
     }
+
+   
 
     public String getMaph() {
         return maph;
@@ -55,5 +57,7 @@ public class TreModel {
     public void setMaph(String maph) {
         this.maph = maph;
     }
+
+    
     
 }

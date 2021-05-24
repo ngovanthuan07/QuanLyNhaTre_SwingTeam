@@ -8,6 +8,7 @@ import com.swingteam.model.PhuHuynhModel;
 import com.swingteam.model.TreModel;
 import com.swingteam.service.PhuHuynhService;
 import com.swingteam.service.TreSerVice;
+import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 /**
@@ -20,11 +21,13 @@ public class TrePanel extends javax.swing.JPanel {
      * Creates new form TrePanel
      */
     TreSerVice treSerVice;
+   TreModel treModel;
     PhuHuynhService phuHuynhService;
     public TrePanel() {
         initComponents();
         treSerVice = new TreSerVice();
         phuHuynhService = new PhuHuynhService();
+        treModel = new TreModel();
         DefaultTableModel dtm = new DefaultTableModel();
         tableTre.setModel(dtm);
         dtm.addColumn("Mã trẻ");
@@ -48,6 +51,11 @@ public class TrePanel extends javax.swing.JPanel {
         List<PhuHuynhModel> phs= phuHuynhService.getPH();
         for(PhuHuynhModel ph : phs){
             dtm1.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
+        }
+        
+        List<PhuHuynhModel> phuynhs= phuHuynhService.getPH();
+        for(PhuHuynhModel phuynh : phuynhs){
+            cbMaPH.addItem(phuynh.getMaph());
         }
     }
 
@@ -139,6 +147,11 @@ public class TrePanel extends javax.swing.JPanel {
         jLabel6.setText("Mã Phụ Huynh:");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/add.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/edit.png"))); // NOI18N
 
@@ -484,6 +497,26 @@ public class TrePanel extends javax.swing.JPanel {
     private void txtMatreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatreActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        treModel.setMatre("");
+        treModel.setTentre(txtHoTen.getText());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String ngsinh =dateFormat.format(txtNgaysinh.getDate());
+        treModel.setNgaysinh(ngsinh);
+        if(rbNam.isSelected())
+            treModel.setGioi(1);
+        if(rbNu.isSelected())
+            treModel.setGioi(0);
+        treModel.setMaph(cbMaPH.getSelectedItem().toString());
+        treSerVice.addTre(treModel);
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tableTre.getModel();
+        defaultTableModel.setRowCount(0);
+        List<TreModel> tres= treSerVice.getTre();
+        for(TreModel tre : tres){
+            defaultTableModel.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
