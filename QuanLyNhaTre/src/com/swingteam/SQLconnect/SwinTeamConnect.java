@@ -14,9 +14,11 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class SwinTeamConnect {
-    public static Connection SQLConnect(){
-        final String user="sa";
-        final String password="minhhieu259";
+    public static String user="sa";
+    public static String password="swingteam";
+    
+    public static Connection SQLConnect(){// connect cua Nguyen Minh Hieu
+
         final String url="jdbc:sqlserver://localhost:1433;databaseName=QLHang;user="+user+";password="+password;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -30,12 +32,10 @@ public class SwinTeamConnect {
         }
         return null;
     }
-    public Connection getConnection() throws SQLException {// của tau nhé hiếu
+    public Connection getConnection() throws SQLException {// connect con Ngo Van Thuan
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHATRE";
-            String user = "sa";
-            String password = "thuan07";
             return DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
             return null;
