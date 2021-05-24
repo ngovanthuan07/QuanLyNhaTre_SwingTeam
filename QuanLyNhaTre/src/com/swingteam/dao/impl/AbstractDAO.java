@@ -1,5 +1,6 @@
 package com.swingteam.dao.impl;
 
+import com.swingteam.SQLconnect.SwinTeamConnect;
 import com.swingteam.dao.GenericDAO;
 import com.swingteam.mapper.RowMapper;
 import java.sql.Connection;
@@ -12,19 +13,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractDAO<T> implements GenericDAO<T> {
+public class AbstractDAO<T> extends SwinTeamConnect implements GenericDAO<T> {
 
-    public Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHATRE";
-            String user = "sa";
-            String password = "thuan07";
-            return DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            return null;
-        }
-    }
+
 
     @Override
     public <T> List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {

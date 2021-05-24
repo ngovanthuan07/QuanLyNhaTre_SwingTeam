@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package com.swingteam.dao;
-import com.swingteam.SQLconnect.HieuConnect;
+import com.swingteam.SQLconnect.SwinTeamConnect;
 import com.swingteam.model.TreModel;
 import java.io.IOException;
-import java.io.Serial;
+
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class TreDao {
     public List<TreModel> getTre(){
     List<TreModel> tres = new ArrayList<TreModel>();
-    Connection connection = HieuConnect.SQLConnect();
+    Connection connection = SwinTeamConnect.SQLConnect();
     
     String sql = "SELECT * FROM TRE";
         try {
@@ -44,7 +44,7 @@ public class TreDao {
         return tres;
 }
      public void addTre(TreModel tre){
-        Connection connection=HieuConnect.SQLConnect();
+        Connection connection=SwinTeamConnect.SQLConnect();
         String sql="INSERT INTO TRE( MATRE, HOTEN, NGAYSINH, GIOITINH, MAPHUHUYNH) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement= connection.prepareStatement(sql);
@@ -61,7 +61,7 @@ public class TreDao {
     }
      
      public void updateTre(TreModel tre){
-        Connection connection=HieuConnect.SQLConnect();
+        Connection connection=SwinTeamConnect.SQLConnect();
         String sql="UPDATE  TRE SET HOTEN= ?, NGAYSINH= ?,  GIOITINH= ?, MAPHUHUYNH= ? WHERE MATRE =?";
                
         try {
@@ -80,7 +80,7 @@ public class TreDao {
     }
    
      public void deleteTre(String matre){
-        Connection connection = HieuConnect.SQLConnect();
+        Connection connection = SwinTeamConnect.SQLConnect();
         String sql= "DELETE FROM TRE where MATRE = ?";
         PreparedStatement preparedStatement;
         try {
@@ -94,7 +94,7 @@ public class TreDao {
         
     }
      public TreModel getTreByMa(String ma) throws IOException, SQLException{
-        Connection connection = HieuConnect.SQLConnect();
+        Connection connection = SwinTeamConnect.SQLConnect();
          String sql = "SELECT * FROM TRE WHERE MATRE = ?";
         
         try {
@@ -119,7 +119,7 @@ public class TreDao {
      
      public List<TreModel> searchTreByTen(String tentre) throws SQLException{
         List<TreModel> tres = new ArrayList<TreModel>();
-        Connection connection = HieuConnect.SQLConnect();
+        Connection connection = SwinTeamConnect.SQLConnect();
         String sql = "SELECT * FROM TRE WHERE HOTEN like N'%"+tentre+"%'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -141,7 +141,7 @@ public class TreDao {
      
       public List<TreModel> searchTreByMatre(String matre) throws SQLException{
         List<TreModel> tres = new ArrayList<TreModel>();
-        Connection connection = HieuConnect.SQLConnect();
+        Connection connection = SwinTeamConnect.SQLConnect();
         String sql = "SELECT * FROM TRE WHERE MATRE like N'%"+matre+"%'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
