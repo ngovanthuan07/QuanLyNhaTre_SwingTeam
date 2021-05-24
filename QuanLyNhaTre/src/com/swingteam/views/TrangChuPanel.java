@@ -27,7 +27,7 @@ public class TrangChuPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpnView = new javax.swing.JPanel();
+        jpnTrangChu = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -40,17 +40,17 @@ public class TrangChuPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1150, 684));
 
-        jpnView.setBackground(new java.awt.Color(255, 255, 255));
-        jpnView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnTrangChu.setBackground(new java.awt.Color(255, 255, 255));
+        jpnTrangChu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 255));
         jLabel2.setText("Quản Lý Trường Mầm Non");
-        jpnView.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 511, 112));
+        jpnTrangChu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 511, 112));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Sinh viên thực hiện:");
-        jpnView.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 198, 30));
+        jpnTrangChu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 198, 30));
 
         jPanel1.setBackground(new java.awt.Color(235, 235, 235));
         jPanel1.setLayout(new java.awt.GridLayout(5, 0, 10, 20));
@@ -75,26 +75,22 @@ public class TrangChuPanel extends javax.swing.JPanel {
         jLabel7.setText("Nguyễn Quốc Toản");
         jPanel1.add(jLabel7);
 
-        jpnView.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, 210));
+        jpnTrangChu.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, 210));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/backgrond truong mam non.jpg"))); // NOI18N
         jLabel9.setText("jLabel9");
-        jpnView.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 680));
+        jpnTrangChu.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jpnTrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnTrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -110,6 +106,6 @@ public class TrangChuPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jpnView;
+    private javax.swing.JPanel jpnTrangChu;
     // End of variables declaration//GEN-END:variables
 }
