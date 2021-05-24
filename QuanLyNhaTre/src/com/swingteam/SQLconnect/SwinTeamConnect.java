@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author ADMIN
  */
-public class HieuConnect {
+public class SwinTeamConnect {
     public static Connection SQLConnect(){
         final String user="sa";
         final String password="minhhieu259";
@@ -29,5 +29,16 @@ public class HieuConnect {
             
         }
         return null;
+    }
+    public Connection getConnection() throws SQLException {// của tau nhé hiếu
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHATRE";
+            String user = "sa";
+            String password = "thuan07";
+            return DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            return null;
+        }
     }
 }
