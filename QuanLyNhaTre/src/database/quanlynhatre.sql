@@ -96,11 +96,11 @@ create table GiaoVien
 	ngaySinh date not null,
 	cmnd varchar(15) not null unique,
 	ngayVaoLam date not null,
-	tranThai bit not null,
+	Gioitinh bit not null,
 	diaChi nvarchar(250) not null,
 	soDienThoai varchar(11) not null unique,
-	ghiChu nvarchar(100) null, 
-	maBacLuong varchar(20) not null
+	maBacLuong varchar(20) not null,
+	ghiChu nvarchar(100) null
 )
 go
 alter table GiaoVien
