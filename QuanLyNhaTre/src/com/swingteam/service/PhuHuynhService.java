@@ -37,4 +37,7 @@ public class PhuHuynhService {
     public List<PhuHuynhModel> searchPHByMa(String maph) throws SQLException{
         return phuHuynhDao.searchPHByMa(maph);
     }
+    public List<PhuHuynhModel> getPHCuaTre(String matre) throws SQLException{
+        return phuHuynhDao.getPHCuaTre(matre);
+    }
 }

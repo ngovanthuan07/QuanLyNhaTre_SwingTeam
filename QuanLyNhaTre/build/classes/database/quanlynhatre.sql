@@ -96,6 +96,10 @@ create table GiaoVien
 	ngaySinh date not null,
 	cmnd varchar(15) not null unique,
 	ngayVaoLam date not null,
+<<<<<<< HEAD
+=======
+        trangThai bit not null,
+>>>>>>> 60a1266094b09ed8942fbd012a9c4756bd8bf6e0
 	gioiTinh bit not null,
 	diaChi nvarchar(250) not null,
 	soDienThoai varchar(11) not null unique,
@@ -118,7 +122,6 @@ declare @lastmadh varchar(20)
 set @lastmadh= (select top 1 maGiaoVien from giaovien order by maGiaoVien desc) 
 update giaovien set maGiaoVien = dbo.func_nextmadh(@lastmadh,'GV_',7) where maGiaoVien=''
 end
---insert into giaovien values('',N'Hiếu','10-11-2001','191973288','10/11/2001',1,'huế','0202020',N'khjh','BL_0001')
 go
 create table NamHoc
 (
