@@ -64,10 +64,15 @@ public class HocPhiPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/edit.png"))); // NOI18N
         jButton2.setText("Chỉnh sửa");
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/remove.png"))); // NOI18N
         jButton3.setText("Xóa");
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/print-131964753156480777.png"))); // NOI18N
         jButton4.setText("In hóa đơn");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -262,12 +267,14 @@ public class HocPhiPanel extends javax.swing.JPanel {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/report.png"))); // NOI18N
         jButton5.setText("Xem báo cáo học phí");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel7.setText("Học phí");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/add.png"))); // NOI18N
         jButton1.setText("Thêm");
 
         jButton6.setText("Quay lại");
@@ -291,8 +298,8 @@ public class HocPhiPanel extends javax.swing.JPanel {
                                 .addGap(50, 50, 50)
                                 .addComponent(jButton2)
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
                                 .addComponent(jButton4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

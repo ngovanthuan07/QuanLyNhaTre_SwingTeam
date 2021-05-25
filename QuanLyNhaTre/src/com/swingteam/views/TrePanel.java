@@ -121,11 +121,18 @@ public class TrePanel extends javax.swing.JPanel {
         txtSearchPH = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("QUẢN LÝ TRẺ");
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255)));
 
         jLabel2.setText("Họ Tên:");
@@ -257,8 +264,10 @@ public class TrePanel extends javax.swing.JPanel {
 
         jButton1.setText("Tìm Kiếm");
 
+        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("Tìm theo mã");
 
+        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Tìm theo tên");
 
         tablePH2.setModel(new javax.swing.table.DefaultTableModel(
@@ -327,6 +336,9 @@ public class TrePanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Quản lý trẻ", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255)));
 
         jLabel8.setText("Mã Phụ Huynh:");
@@ -398,7 +410,7 @@ public class TrePanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaPH2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(txtMaPH2))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,6 +446,7 @@ public class TrePanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27))
         );
 
+        tablePH.setForeground(new java.awt.Color(255, 255, 255));
         tablePH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
