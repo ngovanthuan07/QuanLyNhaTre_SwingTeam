@@ -30,7 +30,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private NhanVienService nhanVienService;
     private BacLuongService bacLuongService;
     private ChucVuService chucVuService;
-    DefaultTableModel modelBacLuong, modelChucVu, modelNhanVien,modelNhanVien_ChucVu;
+    DefaultTableModel modelBacLuong, modelChucVu, modelNhanVien, modelNhanVien_ChucVu, modelNhanVien_BacLuong;
 
     public NhanVienPanel() {
         initComponents();
@@ -336,7 +336,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblNhanVien_QuanLyLuong = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -994,8 +994,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(102, 204, 255));
 
-        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblNhanVien_QuanLyLuong.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tblNhanVien_QuanLyLuong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -1012,7 +1012,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 "STT", "Tên Nhân Viên", "Hệ Số Bậc", "Mức lương cơ bản", "Tổng Lương"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblNhanVien_QuanLyLuong);
 
         jPanel4.setBackground(new java.awt.Color(255, 153, 204));
 
@@ -1174,6 +1174,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 "STT", "Mã Bậc Lương", "Hệ Số", "Lương Căn Bản"
             }
         ));
+        tbl_QuanLyBacLuong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_QuanLyBacLuongMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_QuanLyBacLuong);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1280,9 +1285,19 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rbtnNam_NhanVienActionPerformed
 
     private void btnThem_NhanVien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_NhanVien1ActionPerformed
+
+        String regex = "^\\d{9}$";
         if (txtTenNhanVien_NhanVien1.getText().equals("") || txtCmnd_NhanVien.getText().equals("") || txtDiaChi_NhanVien.getText().equals("")
                 || txtSoDT_NhanVien1.getText().equals("")) {
             ThongBao("Bạn nhập bị thiếu", "Lỗi", 1);
+            return;
+        }
+        if (txtCmnd_NhanVien.getText().trim().matches(regex) == false) {
+            ThongBao("so cmnd phải 9 số còn của bạn là " + txtCmnd_NhanVien.getText().length() + " số", "Lỗi", 1);
+            return;
+        }
+        if (txtSoDT_NhanVien1.getText().trim().matches("^\\d{10}$") == false) {
+            ThongBao("so cmnd phải 10 còn của bạn là: " + txtSoDT_NhanVien1.getText().length() + " số", "Lỗi", 1);
             return;
         }
 
@@ -1351,6 +1366,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
         int row = tblNhanVien_NhanVien.getSelectedRow();
         if (row == -1) {
             ThongBao("Vui lòng chọn ô vào bảng để chỉnh sửa", "erro", row);
+            return;
+        }
+        if (txtTenNhanVien_NhanVien1.getText().equals("") || txtCmnd_NhanVien.getText().equals("") || txtDiaChi_NhanVien.getText().equals("")
+                || txtSoDT_NhanVien1.getText().equals("")) {
+            ThongBao("Bạn nhập bị thiếu", "Lỗi", 1);
             return;
         }
         try {
@@ -1501,7 +1521,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             int row = tblChucVu_ChucVu.getSelectedRow();
 
             String maChucVu = tblChucVu_ChucVu.getValueAt(row, 1).toString().trim();
-            
+
             nhanVienService = new NhanVienService();
 
             modelNhanVien_ChucVu = new DefaultTableModel() {
@@ -1510,7 +1530,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     return false;
                 }
             };
-            tblNhanVien_ChucVu.setModel(modelNhanVien);
+            tblNhanVien_ChucVu.setModel(modelNhanVien_ChucVu);
 
             modelNhanVien_ChucVu.addColumn("Stt");
             modelNhanVien_ChucVu.addColumn("Mã Nhân Viên");
@@ -1595,6 +1615,48 @@ public class NhanVienPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnHienThKhongLam_NhanVienActionPerformed
 
+    private void tbl_QuanLyBacLuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QuanLyBacLuongMouseClicked
+        // TODO add your handling code here:
+        int row = tbl_QuanLyBacLuong.getSelectedRow();
+        String maBacLuong = tbl_QuanLyBacLuong.getValueAt(row, 1).toString().trim();
+
+        try {
+            nhanVienService = new NhanVienService();
+
+            modelNhanVien_BacLuong = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            tblNhanVien_QuanLyLuong.setModel(modelNhanVien_BacLuong);
+
+            modelNhanVien_BacLuong.addColumn("Stt");
+            modelNhanVien_BacLuong.addColumn("Mã Nhân Viên");
+            modelNhanVien_BacLuong.addColumn("Tên Nhân Viên");
+            modelNhanVien_BacLuong.addColumn("Hệ số bậc");
+            modelNhanVien_BacLuong.addColumn("Mức luong");
+            modelNhanVien_BacLuong.addColumn("Số tiền / tháng");
+            List<NhanVienModel> listNhanVien = nhanVienService.findByCodeMaBacLuong(maBacLuong);
+
+            if (listNhanVien != null) {
+                for (int i = 0; i < listNhanVien.size(); i++) {
+                    NhanVienModel get = listNhanVien.get(i);
+                    modelNhanVien_BacLuong.addRow(new Object[]{
+                        (i + 1),
+                        get.getMaNhanVien(),
+                        get.getTenNhanVien(),
+                        get.getHeSoBac(),
+                        get.getMucLuongCanBan(),
+                        get.getTongLuong()
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_tbl_QuanLyBacLuongMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBacLuong_QuanLyLuong;
@@ -1655,7 +1717,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblDiaChi_NhanVien1;
     private javax.swing.JLabel lblMaNhanVien_NhanVien1;
@@ -1666,6 +1727,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblChucVu_ChucVu;
     private javax.swing.JTable tblNhanVien_ChucVu;
     private javax.swing.JTable tblNhanVien_NhanVien;
+    private javax.swing.JTable tblNhanVien_QuanLyLuong;
     private javax.swing.JTable tbl_QuanLyBacLuong;
     private javax.swing.JTextArea txtChuThich_NhanVien1;
     private javax.swing.JTextField txtCmnd_NhanVien;

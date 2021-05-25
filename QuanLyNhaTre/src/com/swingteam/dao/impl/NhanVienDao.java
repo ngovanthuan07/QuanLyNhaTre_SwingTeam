@@ -7,6 +7,7 @@ package com.swingteam.dao.impl;
 
 import com.swingteam.dao.INhanVienDAO;
 import com.swingteam.mapper.NhanVienMapper;
+import com.swingteam.mapper.NhanVienMapper_BacLuong;
 import com.swingteam.model.NhanVienModel;
 import java.util.List;
 
@@ -74,7 +75,15 @@ public class NhanVienDao extends AbstractDAO<NhanVienModel> implements INhanVien
     public List<NhanVienModel> findByCodeMaNhanVien(String maChucVuc) {
         String sql = "select * from NhanVien as nv,ChucVu as cv, BacLuong as bl\n"
                 + "where nv.maBacLuong = bl.maBacLuong and nv.maChucVu = cv.maChucVu and nv.trangThai = 1 and nv.maChucVu = ?";
-        List<NhanVienModel> listNhanVien = query(sql, new NhanVienMapper(),maChucVuc);
+        List<NhanVienModel> listNhanVien = query(sql, new NhanVienMapper(), maChucVuc);
+        return listNhanVien.isEmpty() ? null : listNhanVien;
+    }
+
+    @Override
+    public List<NhanVienModel> findByCodeMaBacLuong(String maBacLuong) {
+        String sql = "select *, (bl.heSoBac*bl.mucLuongCanBan) as tongLuong from NhanVien as nv,ChucVu as cv, BacLuong as bl\n"
+                + "where nv.maBacLuong = bl.maBacLuong and nv.maChucVu = cv.maChucVu and nv.maBacLuong = ?";
+        List<NhanVienModel> listNhanVien = query(sql, new NhanVienMapper_BacLuong(),maBacLuong);
         return listNhanVien.isEmpty() ? null : listNhanVien;
     }
 

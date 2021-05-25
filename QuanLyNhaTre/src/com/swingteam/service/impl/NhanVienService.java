@@ -50,5 +50,10 @@ public class NhanVienService implements INhanVienService{
     public List<NhanVienModel> findByCodeMaNhanVien(String maChucVuc) {
         return iNhanVienDAO.findByCodeMaNhanVien(maChucVuc);
     }
+
+    @Override
+    public List<NhanVienModel> findByCodeMaBacLuong(String maBacLuong) {
+        return iNhanVienDAO.findByCodeMaBacLuong(maBacLuong);
+    }
     
 }
