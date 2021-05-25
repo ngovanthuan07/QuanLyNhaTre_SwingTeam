@@ -96,7 +96,7 @@ create table GiaoVien
 	ngaySinh date not null,
 	cmnd varchar(15) not null unique,
 	ngayVaoLam date not null,
-	Gioitinh bit not null,
+	gioiTinh bit not null,
 	diaChi nvarchar(250) not null,
 	soDienThoai varchar(11) not null unique,
 	maBacLuong varchar(20) not null,
