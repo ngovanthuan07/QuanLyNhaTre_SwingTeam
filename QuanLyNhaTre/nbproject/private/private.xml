@@ -7,12 +7,11 @@
         </group>
         <group name="MyProject">
             <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/NhanVienPanel.java</file>
-            <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/TrePanel.java</file>
-            <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/database/quanlynhatre.sql</file>
+            <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/mapper/NhanVienMapper_BacLuong.java</file>
+            <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/model/NhanVienModel.java</file>
             <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/dao/impl/NhanVienDao.java</file>
             <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/dao/INhanVienDAO.java</file>
             <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/service/impl/NhanVienService.java</file>
-            <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/dao/impl/AbstractDAO.java</file>
             <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/service/INhanVienService.java</file>
         </group>
     </open-files>
