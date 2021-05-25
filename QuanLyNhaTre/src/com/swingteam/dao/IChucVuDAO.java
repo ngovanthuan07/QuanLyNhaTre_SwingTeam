@@ -17,4 +17,5 @@ public interface IChucVuDAO {
     String save(ChucVuModel chucVuModel);
     List<ChucVuModel> findByTenChucVu(String tenChucVu);
     List<ChucVuModel> finndByMaChucVu(String maChucVu);
+    void edit(ChucVuModel chucVuModel,String maChucVu);
 }

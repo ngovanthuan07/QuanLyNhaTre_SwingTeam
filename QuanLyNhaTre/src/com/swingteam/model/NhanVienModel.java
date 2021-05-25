@@ -22,8 +22,26 @@ public class NhanVienModel {
     private String ghiChu;
     private String maBacLuong;
     private int heSoBac;
+    private long mucLuongCanBan;
     private String maChucVu;
     private String tenChucVu;
+    private long tongLuong;
+
+    public long getMucLuongCanBan() {
+        return mucLuongCanBan;
+    }
+
+    public void setMucLuongCanBan(long mucLuongCanBan) {
+        this.mucLuongCanBan = mucLuongCanBan;
+    }
+
+    public long getTongLuong() {
+        return tongLuong;
+    }
+
+    public void setTongLuong(long tongLuong) {
+        this.tongLuong = tongLuong;
+    }
 
     public String getMaNhanVien() {
         return maNhanVien;

@@ -18,4 +18,5 @@ public interface INhanVienDAO {
     void edit(NhanVienModel nhanVienModel,String maNhanVien);
     List<NhanVienModel> findAllKhongLam();
     List<NhanVienModel> findByCodeMaNhanVien(String maChucVuc);
+    List<NhanVienModel> findByCodeMaBacLuong(String maBacLuong);
 }

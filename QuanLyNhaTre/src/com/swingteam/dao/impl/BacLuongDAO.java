@@ -28,5 +28,17 @@ public class BacLuongDAO extends AbstractDAO<BacLuongModel> implements IBacLuong
         String sql = "insert into BacLuong (maBacLuong,heSoBac,mucLuongCanBan) values (?,?,?)";
         return (String) insert(sql, bacLuongModel.getMaBacLuong(),bacLuongModel.getHeSoBac(),bacLuongModel.getMucLuongCanBan());
     }
+
+    @Override
+    public void edit(BacLuongModel bacluong, String maBacLuong) {
+        String sql = "update BacLuong set heSoBac = ?, mucLuongCanBan = ? where maBacLuong= ?";
+        update(sql, bacluong.getHeSoBac(), bacluong.getMucLuongCanBan(), maBacLuong);
+    }
+
+    @Override
+    public void delete(String maBacLuong) {
+        String sql = "delete BacLuong where maBacLuong = ?";
+        update(sql, maBacLuong);
+    }
     
 }

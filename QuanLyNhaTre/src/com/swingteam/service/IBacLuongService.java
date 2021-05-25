@@ -13,6 +13,12 @@ import java.util.List;
  * @author ngova
  */
 public interface IBacLuongService {
-    List<BacLuongModel> finAll(); 
-    String save(BacLuongModel bacLuongModel);    
+
+    List<BacLuongModel> finAll();
+
+    String save(BacLuongModel bacLuongModel);
+
+    void edit(BacLuongModel bacluong, String maBacLuong);
+
+    void delete(String maBacLuong);
 }

@@ -28,6 +28,8 @@ public class ChucVuDAO extends AbstractDAO<ChucVuModel> implements IChucVuDAO {
         String sql = "insert into ChucVu(maChucVu,tenChucVu) values (?,?)";
         return (String) insert(sql, chucVuModel.getMaChucVu(), chucVuModel.getTenChucVu());
     }
+    
+    
 
     @Override
     public List<ChucVuModel> findByTenChucVu(String tenChucVu) {
@@ -41,6 +43,12 @@ public class ChucVuDAO extends AbstractDAO<ChucVuModel> implements IChucVuDAO {
         String sql = "select * from ChucVu where maChucVu = ?";
         List<ChucVuModel> listChucVu = query(sql, new ChucVuMapper(), maChucVu);
         return listChucVu.isEmpty() ? null : listChucVu;
+    }
+
+    @Override
+    public void edit(ChucVuModel chucVuModel,String maChucVu) {
+        String sql = "update ChucVu set tenChucVu = ? where maChucVu = ?";
+        update(sql, chucVuModel.getTenChucVu(), maChucVu);
     }
 
 }

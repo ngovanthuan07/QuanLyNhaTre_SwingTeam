@@ -32,5 +32,15 @@ public class BacLuongService implements IBacLuongService{
     public String save(BacLuongModel bacLuongModel) {
         return iBacLuongDAO.save(bacLuongModel);
     }
+
+    @Override
+    public void edit(BacLuongModel bacluong, String maBacLuong) {
+        iBacLuongDAO.edit(bacluong, maBacLuong);
+    }
+
+    @Override
+    public void delete(String maBacLuong) {
+        iBacLuongDAO.delete(maBacLuong);
+    }
     
 }
