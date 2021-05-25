@@ -30,7 +30,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private NhanVienService nhanVienService;
     private BacLuongService bacLuongService;
     private ChucVuService chucVuService;
-    DefaultTableModel modelBacLuong, modelChucVu, modelNhanVien;
+    DefaultTableModel modelBacLuong, modelChucVu, modelNhanVien,modelNhanVien_ChucVu;
 
     public NhanVienPanel() {
         initComponents();
@@ -116,7 +116,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         }
 
     }
-    
+
     public void nhanVienKhongLamRender() {
         nhanVienService = new NhanVienService();
 
@@ -167,7 +167,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         }
 
     }
-    
+
     public void renderBacLuong() {
         bacLuongService = new BacLuongService();
 
@@ -328,7 +328,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
         txtTenChucVu_ChucVu = new javax.swing.JTextField();
         btnThem_ChucVu = new javax.swing.JButton();
         btnSua_ChucVu = new javax.swing.JButton();
-        btnReset_ChucVu = new javax.swing.JButton();
         txtMaChucVu_ChucVu = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
@@ -836,13 +835,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
             }
         });
 
-        btnReset_ChucVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/remove.png"))); // NOI18N
-        btnReset_ChucVu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReset_ChucVuActionPerformed(evt);
-            }
-        });
-
         txtMaChucVu_ChucVu.setEditable(false);
         txtMaChucVu_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -862,27 +854,26 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnThem_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel25)
-                        .addComponent(jLabel26)))
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTenChucVu_ChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(txtMaChucVu_ChucVu))
-                        .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26)))
                     .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btnSua_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnReset_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                        .addGap(23, 23, 23))))
+                        .addComponent(btnThem_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(btnSua_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtTenChucVu_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMaChucVu_ChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -899,7 +890,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThem_ChucVu)
                     .addComponent(btnSua_ChucVu)
-                    .addComponent(btnReset_ChucVu)
                     .addComponent(jButton1))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -952,7 +942,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGap(108, 108, 108))
             .addGroup(jPanelChucVuLayout.createSequentialGroup()
                 .addGroup(jPanelChucVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelChucVuLayout.createSequentialGroup()
@@ -1465,8 +1455,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
             nv.setDiaChi(txtDiaChi_NhanVien.getText());
 
             nv.setSoDienThoai(txtSoDT_NhanVien1.getText());
-            
-            nv.setTrangThai(0);  
+
+            nv.setTrangThai(0);
 
             nv.setGhiChu(txtChuThich_NhanVien1.getText());
 
@@ -1507,7 +1497,42 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanelNhanVienComponentShown
 
     private void tblChucVu_ChucVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChucVu_ChucVuMouseClicked
-        return;
+        try {
+            int row = tblChucVu_ChucVu.getSelectedRow();
+
+            String maChucVu = tblChucVu_ChucVu.getValueAt(row, 1).toString().trim();
+            
+            nhanVienService = new NhanVienService();
+
+            modelNhanVien_ChucVu = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            tblNhanVien_ChucVu.setModel(modelNhanVien);
+
+            modelNhanVien_ChucVu.addColumn("Stt");
+            modelNhanVien_ChucVu.addColumn("Mã Nhân Viên");
+            modelNhanVien_ChucVu.addColumn("Tên Nhân Viên");
+            modelNhanVien_ChucVu.addColumn("Chức Vụ");
+
+            List<NhanVienModel> listNhanVien = nhanVienService.findByCodeMaNhanVien(maChucVu);
+
+            if (listNhanVien != null) {
+                for (int i = 0; i < listNhanVien.size(); i++) {
+                    NhanVienModel get = listNhanVien.get(i);
+                    modelNhanVien_ChucVu.addRow(new Object[]{
+                        (i + 1),
+                        get.getMaNhanVien(),
+                        get.getTenNhanVien(),
+                        get.getTenChucVu()
+                    });
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_tblChucVu_ChucVuMouseClicked
 
     private void btnThem_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_ChucVuActionPerformed
@@ -1528,10 +1553,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private void btnSua_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua_ChucVuActionPerformed
         return;
     }//GEN-LAST:event_btnSua_ChucVuActionPerformed
-
-    private void btnReset_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_ChucVuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReset_ChucVuActionPerformed
 
     private void txtMaChucVu_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaChucVu_ChucVuActionPerformed
         // TODO add your handling code here:
@@ -1565,12 +1586,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void btnHienThKhongLam_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThKhongLam_NhanVienActionPerformed
         // TODO add your handling code here:
-        if(btnHienThKhongLam_NhanVien.isSelected() == true){    
+        if (btnHienThKhongLam_NhanVien.isSelected() == true) {
             nhanVienKhongLamRender();
             btnHienThKhongLam_NhanVien.setText("Nhân viên đang làm");
-        }
-        else{
-           nhanVienRender();
+        } else {
+            nhanVienRender();
             btnHienThKhongLam_NhanVien.setText("Nhân viên nghỉ làm");
         }
     }//GEN-LAST:event_btnHienThKhongLam_NhanVienActionPerformed
@@ -1579,7 +1599,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBacLuong_QuanLyLuong;
     private javax.swing.JToggleButton btnHienThKhongLam_NhanVien;
-    private javax.swing.JButton btnReset_ChucVu;
     private javax.swing.JButton btnReset_NhanVien1;
     private javax.swing.JButton btnSua_ChucVu;
     private javax.swing.JButton btnSua_NhanVien1;

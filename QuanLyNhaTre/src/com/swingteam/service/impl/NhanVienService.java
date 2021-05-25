@@ -45,5 +45,10 @@ public class NhanVienService implements INhanVienService{
     public List<NhanVienModel> findAllKhongLam() {
         return iNhanVienDAO.findAllKhongLam();
     }
+
+    @Override
+    public List<NhanVienModel> findByCodeMaNhanVien(String maChucVuc) {
+        return iNhanVienDAO.findByCodeMaNhanVien(maChucVuc);
+    }
     
 }

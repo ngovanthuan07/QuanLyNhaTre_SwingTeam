@@ -70,4 +70,12 @@ public class NhanVienDao extends AbstractDAO<NhanVienModel> implements INhanVien
         return listNhanVien.isEmpty() ? null : listNhanVien;
     }
 
+    @Override
+    public List<NhanVienModel> findByCodeMaNhanVien(String maChucVuc) {
+        String sql = "select * from NhanVien as nv,ChucVu as cv, BacLuong as bl\n"
+                + "where nv.maBacLuong = bl.maBacLuong and nv.maChucVu = cv.maChucVu and nv.trangThai = 1 and nv.maChucVu = ?";
+        List<NhanVienModel> listNhanVien = query(sql, new NhanVienMapper(),maChucVuc);
+        return listNhanVien.isEmpty() ? null : listNhanVien;
+    }
+
 }
