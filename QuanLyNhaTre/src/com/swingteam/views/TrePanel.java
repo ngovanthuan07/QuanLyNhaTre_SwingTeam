@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package com.swingteam.views;
-
+import com.swingteam.model.PhuHuynhModel;
+import com.swingteam.model.TreModel;
+import com.swingteam.service.PhuHuynhService;
+import com.swingteam.service.TreSerVice;
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author ngova
@@ -14,8 +20,43 @@ public class TrePanel extends javax.swing.JPanel {
     /**
      * Creates new form TrePanel
      */
+    TreSerVice treSerVice;
+   TreModel treModel;
+    PhuHuynhService phuHuynhService;
     public TrePanel() {
         initComponents();
+        treSerVice = new TreSerVice();
+        phuHuynhService = new PhuHuynhService();
+        treModel = new TreModel();
+        DefaultTableModel dtm = new DefaultTableModel();
+        tableTre.setModel(dtm);
+        dtm.addColumn("Mã trẻ");
+        dtm.addColumn("Tên trẻ");
+        dtm.addColumn("Ngày sinh");
+        dtm.addColumn("Giới tính");
+        dtm.addColumn("Mã PH");
+        List<TreModel> tres= treSerVice.getTre();
+        for(TreModel tre : tres){
+            dtm.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
+        }
+        DefaultTableModel dtm1 = new DefaultTableModel();
+        tablePH.setModel(dtm1);
+        dtm1.addColumn("Mã PH");
+        dtm1.addColumn("Tên cha");
+        dtm1.addColumn("Tên mẹ");
+        dtm1.addColumn("Nghề cha");
+        dtm1.addColumn("Nghề mẹ");
+        dtm1.addColumn("Số ĐT");
+        dtm1.addColumn("Địa chỉ");
+        List<PhuHuynhModel> phs= phuHuynhService.getPH();
+        for(PhuHuynhModel ph : phs){
+            dtm1.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
+        }
+        
+        List<PhuHuynhModel> phuynhs= phuHuynhService.getPH();
+        for(PhuHuynhModel phuynh : phuynhs){
+            cbMaPH.addItem(phuynh.getMaph());
+        }
     }
 
     /**
@@ -106,6 +147,11 @@ public class TrePanel extends javax.swing.JPanel {
         jLabel6.setText("Mã Phụ Huynh:");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/add.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/edit.png"))); // NOI18N
 
@@ -126,35 +172,36 @@ public class TrePanel extends javax.swing.JPanel {
                     .addComponent(txtHoTen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbNam)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbNu)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNgaysinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addContainerGap()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbNam)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbNu)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNgaysinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGap(99, 99, 99)
-                                .addComponent(cbMaPH, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton2)
-                                .addGap(46, 46, 46)
-                                .addComponent(jButton3)))
-                        .addGap(0, 56, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbMaPH, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 74, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(47, 47, 47)))
                 .addComponent(jButton4)
                 .addGap(39, 39, 39))
         );
@@ -183,10 +230,11 @@ public class TrePanel extends javax.swing.JPanel {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbMaPH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
@@ -220,9 +268,6 @@ public class TrePanel extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
@@ -234,8 +279,11 @@ public class TrePanel extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtSearchTre, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
-                                .addComponent(jButton1)))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                                .addComponent(jButton1))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,7 +409,7 @@ public class TrePanel extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton6)
@@ -405,7 +453,7 @@ public class TrePanel extends javax.swing.JPanel {
                         .addComponent(txtSearchPH, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(jButton8)
-                        .addContainerGap(255, Short.MAX_VALUE))))
+                        .addContainerGap(316, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,6 +497,26 @@ public class TrePanel extends javax.swing.JPanel {
     private void txtMatreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatreActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        treModel.setMatre("");
+        treModel.setTentre(txtHoTen.getText());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String ngsinh =dateFormat.format(txtNgaysinh.getDate());
+        treModel.setNgaysinh(ngsinh);
+        if(rbNam.isSelected())
+            treModel.setGioi(1);
+        if(rbNu.isSelected())
+            treModel.setGioi(0);
+        treModel.setMaph(cbMaPH.getSelectedItem().toString());
+        treSerVice.addTre(treModel);
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tableTre.getModel();
+        defaultTableModel.setRowCount(0);
+        List<TreModel> tres= treSerVice.getTre();
+        for(TreModel tre : tres){
+            defaultTableModel.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

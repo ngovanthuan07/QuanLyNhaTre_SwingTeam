@@ -51,7 +51,7 @@ public class TreDao {
             preparedStatement.setString(1, tre.getMatre());
             preparedStatement.setString(2, tre.getTentre());
             preparedStatement.setString(3, tre.getNgaysinh());
-            preparedStatement.setByte(4, tre.getGioi());
+            preparedStatement.setInt(4, tre.getGioi());
             preparedStatement.setString(5, tre.getMaph());
             int rs = preparedStatement.executeUpdate();
             System.out.println(rs);
@@ -68,7 +68,7 @@ public class TreDao {
             PreparedStatement preparedStatement =connection.prepareStatement(sql);      
             preparedStatement.setString(1,tre.getTentre());
             preparedStatement.setString(2, tre.getNgaysinh());
-            preparedStatement.setByte(3, tre.getGioi());
+            preparedStatement.setInt(3, tre.getGioi());
             preparedStatement.setString(4, tre.getMaph());
             preparedStatement.setString(5, tre.getMatre());
             int rs = preparedStatement.executeUpdate();

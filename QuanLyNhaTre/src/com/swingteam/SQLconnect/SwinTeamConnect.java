@@ -19,7 +19,7 @@ public class SwinTeamConnect {
     
     public static Connection SQLConnect(){// connect cua Nguyen Minh Hieu
 
-        final String url="jdbc:sqlserver://localhost:1433;databaseName=QLHang;user="+user+";password="+password;
+        final String url="jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHATRE;user="+user+";password="+password;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             try {
