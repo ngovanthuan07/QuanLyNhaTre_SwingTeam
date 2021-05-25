@@ -15,4 +15,6 @@ import java.util.List;
 public interface IBacLuongDAO {
     List<BacLuongModel> finAll(); 
     String save(BacLuongModel bacLuongModel);
+    void edit(BacLuongModel bacluong, String maBacLuong);
+    void delete(String maBacLuong);
 }

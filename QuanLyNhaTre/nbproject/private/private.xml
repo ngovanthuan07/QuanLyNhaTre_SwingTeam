@@ -12,12 +12,16 @@
             <file>file:/D:/BaiTapNhom/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/service/INhanVienService.java</file>
         </group>
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/dao/TreDao.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/TrePanel.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/service/TreSerVice.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/Main/Main.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/dao/PhuHuynhDao.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/service/PhuHuynhService.java</file>
+=======
+            <file>file:/C:/Users/nguye/Documents/Java_quanlynhatre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/HocPhiPanel.java</file>
+>>>>>>> 23e25a50355c4498c78d62a7a845129034654f72
         </group>
     </open-files>
 </project-private>

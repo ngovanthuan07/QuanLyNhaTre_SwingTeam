@@ -17,7 +17,7 @@ public class GiaoVienMapper implements RowMapper<GiaoVienModel>{
     public GiaoVienModel mapRow(ResultSet rs) {
         try {
             GiaoVienModel gv = new GiaoVienModel();
-            gv.setMaGiaoVien(rs.getString("maNhanVien"));
+            gv.setMaGiaoVien(rs.getString("maGiaoVien"));
             gv.setTenGiaoVien(rs.getString("tenGiaoVien"));
             gv.setNgaySinh(rs.getString("ngaySinh"));
             gv.setCmnd(rs.getInt("cmnd"));
