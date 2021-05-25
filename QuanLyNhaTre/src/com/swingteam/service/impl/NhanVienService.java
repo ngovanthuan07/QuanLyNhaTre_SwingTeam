@@ -35,5 +35,20 @@ public class NhanVienService implements INhanVienService{
     public String save(NhanVienModel nhanVienModel) {
         return iNhanVienDAO.save(nhanVienModel);
     }
+
+    @Override
+    public void edit(NhanVienModel nhanVienModel, String maNhanVien) {
+        iNhanVienDAO.edit(nhanVienModel, maNhanVien);
+    }
+
+    @Override
+    public List<NhanVienModel> findAllKhongLam() {
+        return iNhanVienDAO.findAllKhongLam();
+    }
+
+    @Override
+    public List<NhanVienModel> findByCodeMaNhanVien(String maChucVuc) {
+        return iNhanVienDAO.findByCodeMaNhanVien(maChucVuc);
+    }
     
 }
