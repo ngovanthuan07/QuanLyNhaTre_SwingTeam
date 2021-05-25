@@ -62,15 +62,15 @@ public class TreDao {
      
      public void updateTre(TreModel tre){
         Connection connection=SwinTeamConnect.SQLConnect();
-        String sql="UPDATE  TRE SET HOTEN= ?, NGAYSINH= ?,  GIOITINH= ?, MAPHUHUYNH= ? WHERE MATRE =?";
+        String sql="UPDATE  TRE SET HOTEN= ?,   GIOITINH= ?, MAPHUHUYNH= ? WHERE MATRE =?";
                
         try {
             PreparedStatement preparedStatement =connection.prepareStatement(sql);      
             preparedStatement.setString(1,tre.getTentre());
-            preparedStatement.setString(2, tre.getNgaysinh());
-            preparedStatement.setInt(3, tre.getGioi());
-            preparedStatement.setString(4, tre.getMaph());
-            preparedStatement.setString(5, tre.getMatre());
+           
+            preparedStatement.setInt(2, tre.getGioi());
+            preparedStatement.setString(3, tre.getMaph());
+            preparedStatement.setString(4, tre.getMatre());
             int rs = preparedStatement.executeUpdate();
             System.out.println(rs);
         } catch (SQLException ex) {

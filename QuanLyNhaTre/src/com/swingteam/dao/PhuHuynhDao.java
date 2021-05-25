@@ -48,7 +48,7 @@ public class PhuHuynhDao {
     
     public void addPH(PhuHuynhModel ph){
         Connection connection=SwinTeamConnect.SQLConnect();
-        String sql="INSERT INTO PHUHUYNH( MAPHUHUYNH, TENCHA, TENME, NGHENGHIEPCHA, NGHENGHIEPME, SODIENTHOAI, DIACHI) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql="INSERT INTO PHUHUYNH( MAPHUHUYNH, TENCHA, TENME, NGHENGHIEPCHA, NGHENGHIEPME, soDienThoaiLienHe, DIACHI) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement= connection.prepareStatement(sql);
             preparedStatement.setString(1, ph.getMaph());
@@ -140,6 +140,31 @@ public class PhuHuynhDao {
                 ph.setNghecha(rs.getString("NGHENGHIEPCHA"));
                 ph.setNgheme(rs.getString("NGHENGHIEPME"));
                 ph.setSdt(rs.getString("SODIENTHOAI"));
+                ph.setDiachi(rs.getString("DIACHI"));   
+                phs.add(ph); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return phs;
+    }
+       
+       public List<PhuHuynhModel> getPHCuaTre(String matre) throws SQLException{
+        List<PhuHuynhModel> phs = new ArrayList<PhuHuynhModel>();
+        Connection connection = SwinTeamConnect.SQLConnect();
+        
+        String sql="select ph.maPhuHuynh,tencha,tenme,soDienThoaiLienHe,diaChi from PhuHuynh as ph,Tre as tr where ph.maPhuHuynh=tr.maPhuHuynh and maTre='"+matre+"'";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs= preparedStatement.executeQuery();
+   
+            while(rs.next()){
+                
+                PhuHuynhModel ph = new PhuHuynhModel();
+                ph.setMaph(rs.getString("MAPHUHUYNH"));
+                ph.setTencha(rs.getString("TENCHA"));
+                ph.setTenme(rs.getString("TENME"));
+                ph.setSdt(rs.getString("soDienThoaiLienHe"));
                 ph.setDiachi(rs.getString("DIACHI"));   
                 phs.add(ph); 
             }
