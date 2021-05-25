@@ -42,5 +42,10 @@ public class ChucVuService implements IChucVuService{
     public List<ChucVuModel> finndByMaChucVu(String maChucVu) {
         return iChucVuDAO.finndByMaChucVu(maChucVu);
     }
+
+    @Override
+    public void edit(ChucVuModel chucVuModel, String maChucVu) {
+        iChucVuDAO.edit(chucVuModel, maChucVu);
+    }
     
 }

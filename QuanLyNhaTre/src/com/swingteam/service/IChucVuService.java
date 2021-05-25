@@ -21,4 +21,6 @@ public interface IChucVuService {
     List<ChucVuModel> findByTenChucVu(String tenChucVu);
 
     List<ChucVuModel> finndByMaChucVu(String maChucVu);
+    
+     void edit(ChucVuModel chucVuModel,String maChucVu);
 }
