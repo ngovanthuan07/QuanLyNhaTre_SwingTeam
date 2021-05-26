@@ -1322,12 +1322,20 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private void btnSua_NhanVien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua_NhanVien1ActionPerformed
         int row = tblNhanVien_NhanVien.getSelectedRow();
         if (row == -1) {
-            ThongBao("Vui lòng chọn ô vào bảng để chỉnh sửa", "erro", row);
+            ThongBao("Vui lòng chọn ô vào bảng để chỉnh sửa", "erro", 2);
             return;
         }
         if (txtTenNhanVien_NhanVien1.getText().equals("") || txtCmnd_NhanVien.getText().equals("") || txtDiaChi_NhanVien.getText().equals("")
                 || txtSoDT_NhanVien1.getText().equals("")) {
             ThongBao("Bạn nhập bị thiếu", "Lỗi", 1);
+            return;
+        }
+        if (txtCmnd_NhanVien.getText().trim().matches("^\\d{9}$") == false) {
+            ThongBao("so cmnd phải 9 số còn của bạn là " + txtCmnd_NhanVien.getText().length() + " số", "Lỗi", 2);
+            return;
+        }
+        if (txtSoDT_NhanVien1.getText().trim().matches("^\\d{10}$") == false) {
+            ThongBao("so sdt phải 10 còn của bạn là: " + txtSoDT_NhanVien1.getText().length() + " số", "Lỗi", 2);
             return;
         }
         try {

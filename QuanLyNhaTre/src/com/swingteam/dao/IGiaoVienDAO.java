@@ -15,4 +15,8 @@ import java.util.List;
 public interface IGiaoVienDAO {
    List<GiaoVienModel> findAll();  
    String save(GiaoVienModel giaoVienModel);
+   List<GiaoVienModel> findAllBacLuong_GiaoVien();
+   void edit(GiaoVienModel giaoVienModel,String maGiaoVien,int HeSo);
+   boolean findByCMND(String cmnd);
+   boolean findBySDT(String sdt);
 }

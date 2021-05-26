@@ -3,6 +3,7 @@ import com.swingteam.bean.DanhMucBean;
 import com.swingteam.views.BuaAnPanel;
 import com.swingteam.views.GiaoVienPanel;
 import com.swingteam.views.HocPhiPanel;
+import com.swingteam.views.LopHocPannel;
 import com.swingteam.views.NhanVienPanel;
 import com.swingteam.views.TrangChuPanel;
 import com.swingteam.views.TrePanel;
@@ -70,6 +71,9 @@ public class MovePanelController {
                     break;
                 case "Tre":
                     node = new TrePanel();
+                    break;
+                case "LopHoc":
+                    node = new LopHocPannel();
                     break;
                 case "BuaAn":
                     node = new BuaAnPanel();
