@@ -33,6 +33,8 @@ public class TrePanel extends javax.swing.JPanel {
     DefaultTableModel dtm;
     public TrePanel() {
         initComponents();
+        txtMatre.setEnabled(false);
+        txtMaPH2.setEnabled(false);
         treSerVice = new TreSerVice();
         phuHuynhModel= new PhuHuynhModel();
         phuHuynhService = new PhuHuynhService();
