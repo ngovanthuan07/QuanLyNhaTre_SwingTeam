@@ -29,6 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
         listItem.add(new DanhMucBean("TrangChu", jpnTrangChu, jlbTrangChu));
         listItem.add(new DanhMucBean("GiaoVien", jpnGiaoVien, jlbGiaoVien));
         listItem.add(new DanhMucBean("Tre", jpnTre, jlbTre));
+        listItem.add(new DanhMucBean("LopHoc", jpnLopHoc, jblLopHoc));
         listItem.add(new DanhMucBean("BuaAn", jpnBuaAn, jlbBuaAn));
         listItem.add(new DanhMucBean("NhanVien", jpnNhanVien, jlbNhanVien));
         listItem.add(new DanhMucBean("HocPhi", jpnHocPhi, jlbHocPhi));
@@ -56,6 +57,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jlbGiaoVien = new javax.swing.JLabel();
         jpnTre = new javax.swing.JPanel();
         jlbTre = new javax.swing.JLabel();
+        jpnLopHoc = new javax.swing.JPanel();
+        jblLopHoc = new javax.swing.JLabel();
         jpnBuaAn = new javax.swing.JPanel();
         jlbBuaAn = new javax.swing.JLabel();
         jpnNhanVien = new javax.swing.JPanel();
@@ -72,7 +75,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jpnRoot.setBackground(new java.awt.Color(255, 255, 255));
 
         jpnMenu.setBackground(new java.awt.Color(255, 255, 255));
-        jpnMenu.setLayout(new java.awt.GridLayout(7, 1, 5, 5));
+        jpnMenu.setLayout(new java.awt.GridLayout(8, 1, 5, 5));
 
         jpnTrangChu.setBackground(new java.awt.Color(0, 204, 153));
 
@@ -91,7 +94,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnTrangChuLayout.setVerticalGroup(
             jpnTrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbTrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbTrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnTrangChu);
@@ -115,7 +118,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnGiaoVienLayout.setVerticalGroup(
             jpnGiaoVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbGiaoVien, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbGiaoVien, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnGiaoVien);
@@ -139,10 +142,37 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnTreLayout.setVerticalGroup(
             jpnTreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbTre, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbTre, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnTre);
+
+        jpnLopHoc.setBackground(new java.awt.Color(0, 204, 153));
+
+        jblLopHoc.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jblLopHoc.setForeground(new java.awt.Color(255, 255, 255));
+        jblLopHoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jblLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/lophoc.png"))); // NOI18N
+        jblLopHoc.setText("Lớp Học");
+
+        javax.swing.GroupLayout jpnLopHocLayout = new javax.swing.GroupLayout(jpnLopHoc);
+        jpnLopHoc.setLayout(jpnLopHocLayout);
+        jpnLopHocLayout.setHorizontalGroup(
+            jpnLopHocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnLopHocLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jblLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpnLopHocLayout.setVerticalGroup(
+            jpnLopHocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnLopHocLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jblLopHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnMenu.add(jpnLopHoc);
 
         jpnBuaAn.setBackground(new java.awt.Color(0, 204, 153));
 
@@ -163,7 +193,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnBuaAnLayout.setVerticalGroup(
             jpnBuaAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbBuaAn, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbBuaAn, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnBuaAn);
@@ -187,7 +217,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnNhanVienLayout.setVerticalGroup(
             jpnNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnNhanVien);
@@ -211,7 +241,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnHocPhiLayout.setVerticalGroup(
             jpnHocPhiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbHocPhi, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbHocPhi, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnHocPhi);
@@ -238,7 +268,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnDangXuatLayout.setVerticalGroup(
             jpnDangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(jlbDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         jpnMenu.add(jpnDangXuat);
@@ -253,7 +283,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jpnRootLayout.setVerticalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+            .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
         );
 
         jpnView.setBackground(new java.awt.Color(255, 255, 255));
@@ -281,7 +311,7 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpnRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpnView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -296,6 +326,7 @@ public class MainJFrame extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jblLopHoc;
     private javax.swing.JLabel jlbBuaAn;
     private javax.swing.JLabel jlbDangXuat;
     private javax.swing.JLabel jlbGiaoVien;
@@ -307,6 +338,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnGiaoVien;
     private javax.swing.JPanel jpnHocPhi;
+    private javax.swing.JPanel jpnLopHoc;
     private javax.swing.JPanel jpnMenu;
     private javax.swing.JPanel jpnNhanVien;
     private javax.swing.JPanel jpnRoot;
