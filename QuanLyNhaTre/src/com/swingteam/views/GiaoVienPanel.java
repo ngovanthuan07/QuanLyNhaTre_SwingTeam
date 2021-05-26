@@ -30,9 +30,7 @@ public class GiaoVienPanel extends javax.swing.JPanel {
 
     public GiaoVienPanel() {
         initComponents();
-<<<<<<< HEAD
-        //hello 
-=======
+
         bacLuongService = new BacLuongService();
 
         try {
@@ -119,7 +117,6 @@ public class GiaoVienPanel extends javax.swing.JPanel {
         txt_tengiaovien_danhsachgiaovien.setText("");
         txt_diachi_danhsachgiaovien.setText("");
         txt_sodienthoai_danhsachgiaovien.setText("");
->>>>>>> 9c6639b7ab3977b8d78623a414539043fa6ce6b7
     }
 
     /**
