@@ -66,7 +66,7 @@ public class PhuHuynhDao {
     }
       public void updatePH(PhuHuynhModel ph){
         Connection connection=SwinTeamConnect.SQLConnect();
-        String sql="UPDATE  PHUHUYNH SET TENCHA= ?, TENME= ?,  NGHENGHIEPCHA= ?, NGHENGHIEPME= ?, SODIENTHOAI= ?, DIACHI= ? WHERE MAPHUHUYNH =?";
+        String sql="UPDATE  PHUHUYNH SET TENCHA= ?, TENME= ?,  NGHENGHIEPCHA= ?, NGHENGHIEPME= ?, soDienThoaiLienHe= ?, DIACHI= ? WHERE MAPHUHUYNH =?";
                
         try {
             PreparedStatement preparedStatement =connection.prepareStatement(sql);                 
@@ -114,7 +114,7 @@ public class PhuHuynhDao {
                 ph.setTenme(rs.getString("TENME"));
                 ph.setNghecha(rs.getString("NGHENGHIEPCHA"));
                 ph.setNgheme(rs.getString("NGHENGHIEPME"));
-                ph.setSdt(rs.getString("SODIENTHOAI"));
+                ph.setSdt(rs.getString("soDienThoaiLienHe"));
                 ph.setDiachi(rs.getString("DIACHI"));
                  return ph;
             }
@@ -139,7 +139,7 @@ public class PhuHuynhDao {
                 ph.setTenme(rs.getString("TENME"));
                 ph.setNghecha(rs.getString("NGHENGHIEPCHA"));
                 ph.setNgheme(rs.getString("NGHENGHIEPME"));
-                ph.setSdt(rs.getString("SODIENTHOAI"));
+                ph.setSdt(rs.getString("soDienThoaiLienHe"));
                 ph.setDiachi(rs.getString("DIACHI"));   
                 phs.add(ph); 
             }

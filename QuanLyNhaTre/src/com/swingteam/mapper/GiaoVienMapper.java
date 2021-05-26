@@ -20,13 +20,15 @@ public class GiaoVienMapper implements RowMapper<GiaoVienModel>{
             gv.setMaGiaoVien(rs.getString("maGiaoVien"));
             gv.setTenGiaoVien(rs.getString("tenGiaoVien"));
             gv.setNgaySinh(rs.getString("ngaySinh"));
-            gv.setCmnd(rs.getInt("cmnd"));
+            gv.setCmnd(rs.getString("cmnd"));
+            gv.setTrangThai(rs.getInt("trangThai"));
             gv.setNgayVaoLam(rs.getString("ngayVaoLam"));
             gv.setGioiTinh(rs.getInt("gioiTinh"));
             gv.setDiaChi(rs.getString("diaChi"));
             gv.setSoDienThoai(rs.getString("soDienThoai"));
             gv.setGhiChu(rs.getString("ghiChu"));
             gv.setMaBacLuong(rs.getString("maBacLuong"));
+            gv.setHeSoBac(rs.getInt("heSoBac"));
             return gv;
         } catch (Exception e) {
             return null;
