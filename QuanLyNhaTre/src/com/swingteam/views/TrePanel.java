@@ -8,9 +8,14 @@ import com.swingteam.model.PhuHuynhModel;
 import com.swingteam.model.TreModel;
 import com.swingteam.service.PhuHuynhService;
 import com.swingteam.service.TreSerVice;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ngova
@@ -22,10 +27,13 @@ public class TrePanel extends javax.swing.JPanel {
      */
     TreSerVice treSerVice;
    TreModel treModel;
+   DefaultTableModel dtm2;
+   PhuHuynhModel phuHuynhModel;
     PhuHuynhService phuHuynhService;
     public TrePanel() {
         initComponents();
         treSerVice = new TreSerVice();
+        phuHuynhModel= new PhuHuynhModel();
         phuHuynhService = new PhuHuynhService();
         treModel = new TreModel();
         DefaultTableModel dtm = new DefaultTableModel();
@@ -39,8 +47,16 @@ public class TrePanel extends javax.swing.JPanel {
         for(TreModel tre : tres){
             dtm.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
         }
+         dtm2 = new DefaultTableModel();
+        tablePH1.setModel(dtm2);
+        dtm2.addColumn("Mã PH");
+         dtm2.addColumn("Tên Cha");
+          dtm2.addColumn("Tên mẹ");
+           dtm2.addColumn("Số ĐT");
+            dtm2.addColumn("Địa chỉ");
+            
         DefaultTableModel dtm1 = new DefaultTableModel();
-        tablePH.setModel(dtm1);
+        tablePH2.setModel(dtm1);
         dtm1.addColumn("Mã PH");
         dtm1.addColumn("Tên cha");
         dtm1.addColumn("Tên mẹ");
@@ -53,10 +69,11 @@ public class TrePanel extends javax.swing.JPanel {
             dtm1.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
         }
         
-        List<PhuHuynhModel> phuynhs= phuHuynhService.getPH();
-        for(PhuHuynhModel phuynh : phuynhs){
+        
+        for(PhuHuynhModel phuynh : phs){
             cbMaPH.addItem(phuynh.getMaph());
         }
+        
     }
 
     /**
@@ -94,7 +111,7 @@ public class TrePanel extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tablePH2 = new javax.swing.JTable();
+        tablePH1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -115,11 +132,11 @@ public class TrePanel extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablePH = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         txtSearchPH = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tablePH2 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -163,8 +180,18 @@ public class TrePanel extends javax.swing.JPanel {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/edit.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/remove.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -258,6 +285,11 @@ public class TrePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableTre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableTreMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableTre);
 
         jLabel7.setText("Tìm kiếm trẻ:");
@@ -270,7 +302,7 @@ public class TrePanel extends javax.swing.JPanel {
         jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Tìm theo tên");
 
-        tablePH2.setModel(new javax.swing.table.DefaultTableModel(
+        tablePH1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -281,7 +313,7 @@ public class TrePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tablePH2);
+        jScrollPane4.setViewportView(tablePH1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -327,7 +359,7 @@ public class TrePanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -360,6 +392,11 @@ public class TrePanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtDiachi);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/add.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/edit.png"))); // NOI18N
 
@@ -410,7 +447,7 @@ public class TrePanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaPH2))
+                    .addComponent(txtMaPH2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,7 +475,7 @@ public class TrePanel extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton6)
@@ -446,8 +483,11 @@ public class TrePanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27))
         );
 
-        tablePH.setForeground(new java.awt.Color(255, 255, 255));
-        tablePH.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel15.setText("Tìm Kiếm");
+
+        jButton8.setText("Tìm Kiếm");
+
+        tablePH2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -458,11 +498,7 @@ public class TrePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tablePH);
-
-        jLabel15.setText("Tìm Kiếm");
-
-        jButton8.setText("Tìm Kiếm");
+        jScrollPane5.setViewportView(tablePH2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -473,17 +509,16 @@ public class TrePanel extends javax.swing.JPanel {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtSearchPH, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(jButton8)
-                        .addContainerGap(316, Short.MAX_VALUE))))
+                        .addComponent(jButton8))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,8 +531,9 @@ public class TrePanel extends javax.swing.JPanel {
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearchPH, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 53, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Quản Lý Phụ Huynh", jPanel2);
@@ -548,6 +584,119 @@ public class TrePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void tableTreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTreMouseClicked
+        int row = tableTre.getSelectedRow();
+        String matre= (String)tableTre.getValueAt(row, 0);
+        try {
+            TreModel tre= treSerVice.getTreByMa(matre);
+            txtMatre.setText(tre.getMatre());
+            txtHoTen.setText(tre.getTentre());
+            if(tre.getGioi()==1)
+            {
+                rbNam.setSelected(true);
+                rbNu.setSelected(false);
+            }
+                
+            if(tre.getGioi()==0)
+            {
+                 rbNu.setSelected(true);
+            rbNam.setSelected(false);
+            }
+            cbMaPH.setSelectedItem(tre.getMaph());
+        } catch (IOException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            List<PhuHuynhModel> phs= phuHuynhService.getPHCuaTre(matre);
+            dtm2.setRowCount(0);
+            for(PhuHuynhModel ph :phs){
+                dtm2.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getSdt(),ph.getDiachi()});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_tableTreMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int row = tableTre.getSelectedRow();
+        if(row==-1)
+            JOptionPane.showMessageDialog(txtHoTen, "Chưa chọn trẻ để sửa");
+        else{
+            try {
+                treModel= treSerVice.getTreByMa(txtMatre.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            treModel.setMatre(txtMatre.getText());
+      treModel.setTentre(txtHoTen.getText());
+//      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        String ngsinh =dateFormat.format(txtNgaysinh.getDate());
+//      treModel.setNgaysinh(ngsinh.toString());
+      if(rbNam.isSelected())
+          treModel.setGioi(1);
+      if(rbNu.isSelected())
+          treModel.setGioi(0);
+      treModel.setMaph(cbMaPH.getSelectedItem().toString());
+      treSerVice.updateTre(treModel);
+        }
+        
+      DefaultTableModel defaultTableModel= (DefaultTableModel)tableTre.getModel();
+            defaultTableModel.setRowCount(0);
+            List<TreModel> tres= treSerVice.getTre();
+        for(TreModel tre : tres){
+            defaultTableModel.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
+        }
+        JOptionPane.showMessageDialog(txtHoTen, "Sửa trẻ thành công");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int row = tableTre.getSelectedRow();
+       if(row == -1)
+       {
+           JOptionPane.showMessageDialog(TrePanel.this,"Vui lòng chọn trẻ để xóa", "Lỗi",JOptionPane.ERROR_MESSAGE);
+       }
+       else{
+           int confirm = JOptionPane.showConfirmDialog(TrePanel.this,"Bạn có chắc muốn xóa không ?");
+           if (confirm == JOptionPane.YES_OPTION)
+           {
+               String matre = (String) tableTre.getValueAt(row, 0);
+               treSerVice.deleteTre(matre);
+            DefaultTableModel defaultTableModel= (DefaultTableModel)tableTre.getModel();
+            defaultTableModel.setRowCount(0);
+            List<TreModel> tres= treSerVice.getTre();
+        for(TreModel tre : tres){
+            defaultTableModel.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
+        }
+           }
+       }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        phuHuynhModel.setMaph("");
+        phuHuynhModel.setTencha(txtTenCha.getText());
+        phuHuynhModel.setTenme(txtTenMe.getText());
+        phuHuynhModel.setNghecha(txtNgheCha.getText());
+        phuHuynhModel.setNgheme(txtNgheMe.getText());
+        phuHuynhModel.setSdt(txtSDT.getText());
+        phuHuynhModel.setDiachi(txtDiachi.getText());
+        phuHuynhService.addPH(phuHuynhModel);
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tablePH2.getModel();
+        defaultTableModel.setRowCount(0);
+        List<PhuHuynhModel> phs= phuHuynhService.getPH();
+        for(PhuHuynhModel ph : phs){
+            defaultTableModel.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
+        }
+        JOptionPane.showMessageDialog(txtHoTen, "Thêm thành công");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbMaPH;
@@ -582,12 +731,12 @@ public class TrePanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton rbNam;
     private javax.swing.JRadioButton rbNu;
-    private javax.swing.JTable tablePH;
+    private javax.swing.JTable tablePH1;
     private javax.swing.JTable tablePH2;
     private javax.swing.JTable tableTre;
     private javax.swing.JTextArea txtDiachi;
