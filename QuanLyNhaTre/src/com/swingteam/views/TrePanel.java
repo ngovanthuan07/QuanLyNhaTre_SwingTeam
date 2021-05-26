@@ -30,13 +30,14 @@ public class TrePanel extends javax.swing.JPanel {
    DefaultTableModel dtm2;
    PhuHuynhModel phuHuynhModel;
     PhuHuynhService phuHuynhService;
+    DefaultTableModel dtm;
     public TrePanel() {
         initComponents();
         treSerVice = new TreSerVice();
         phuHuynhModel= new PhuHuynhModel();
         phuHuynhService = new PhuHuynhService();
         treModel = new TreModel();
-        DefaultTableModel dtm = new DefaultTableModel();
+         dtm = new DefaultTableModel();
         tableTre.setModel(dtm);
         dtm.addColumn("Mã trẻ");
         dtm.addColumn("Tên trẻ");
@@ -85,6 +86,8 @@ public class TrePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -108,8 +111,8 @@ public class TrePanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         txtSearchTre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbMa = new javax.swing.JRadioButton();
+        rbTen = new javax.swing.JRadioButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablePH1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -166,8 +169,10 @@ public class TrePanel extends javax.swing.JPanel {
 
         jLabel5.setText("Giới Tính:");
 
+        buttonGroup2.add(rbNam);
         rbNam.setText("Nam");
 
+        buttonGroup2.add(rbNu);
         rbNu.setText("Nữ");
 
         jLabel6.setText("Mã Phụ Huynh:");
@@ -295,12 +300,19 @@ public class TrePanel extends javax.swing.JPanel {
         jLabel7.setText("Tìm kiếm trẻ:");
 
         jButton1.setText("Tìm Kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("Tìm theo mã");
+        rbMa.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbMa);
+        rbMa.setText("Tìm theo mã");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("Tìm theo tên");
+        rbTen.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbTen);
+        rbTen.setText("Tìm theo tên");
 
         tablePH1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,9 +339,9 @@ public class TrePanel extends javax.swing.JPanel {
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rbMa)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))
+                                .addComponent(rbTen))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtSearchTre, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
@@ -348,8 +360,8 @@ public class TrePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbMa)
+                    .addComponent(rbTen))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,8 +411,18 @@ public class TrePanel extends javax.swing.JPanel {
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/edit.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/remove.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -486,6 +508,11 @@ public class TrePanel extends javax.swing.JPanel {
         jLabel15.setText("Tìm Kiếm");
 
         jButton8.setText("Tìm Kiếm");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         tablePH2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -498,6 +525,11 @@ public class TrePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablePH2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePH2MouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tablePH2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -565,7 +597,13 @@ public class TrePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtMatreActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        treModel.setMatre("");
+        if(txtHoTen.getText().isEmpty()||(!rbNam.isSelected()&&!rbNu.isSelected()))
+        {
+            JOptionPane.showMessageDialog(rbTen, "Phải nhập đày đủ thông tin");
+        }
+        else
+        {
+            treModel.setMatre("");
         treModel.setTentre(txtHoTen.getText());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String ngsinh =dateFormat.format(txtNgaysinh.getDate());
@@ -582,6 +620,8 @@ public class TrePanel extends javax.swing.JPanel {
         for(TreModel tre : tres){
             defaultTableModel.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
         }
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableTreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTreMouseClicked
@@ -680,7 +720,13 @@ public class TrePanel extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        phuHuynhModel.setMaph("");
+        if(txtTenCha.getText().isEmpty()||txtTenMe.getText().isEmpty()||txtNgheCha.getText().isEmpty()||txtNgheMe.getText().isEmpty()||txtSDT.getText().isEmpty()
+                ||txtDiachi.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(rbTen, "Phải điền đầy đủ thông tin");
+        }
+        else{
+            phuHuynhModel.setMaph("");
         phuHuynhModel.setTencha(txtTenCha.getText());
         phuHuynhModel.setTenme(txtTenMe.getText());
         phuHuynhModel.setNghecha(txtNgheCha.getText());
@@ -695,10 +741,133 @@ public class TrePanel extends javax.swing.JPanel {
             defaultTableModel.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
         }
         JOptionPane.showMessageDialog(txtHoTen, "Thêm thành công");
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            if(rbTen.isSelected())
+            {
+                List<TreModel> tres= treSerVice.searchTreByTen(txtSearchTre.getText());
+            dtm.setRowCount(0);
+            
+        for(TreModel tre : tres){
+            dtm.addRow(new Object[]{tre.getMatre(),tre.getTentre(),tre.getNgaysinh(),tre.getGioi(),tre.getMaph()});
+        }
+            }
+            else
+                if(rbMa.isSelected())
+                {
+                    List<TreModel> tres2= treSerVice.searchTreByMatre(txtSearchTre.getText());
+            dtm.setRowCount(0);
+            
+        for(TreModel tre2 : tres2){
+            dtm.addRow(new Object[]{tre2.getMatre(),tre2.getTentre(),tre2.getNgaysinh(),tre2.getGioi(),tre2.getMaph()});
+        }
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        int row = tablePH2.getSelectedRow();
+        if(row==-1)
+            JOptionPane.showMessageDialog(txtHoTen, "Chưa chọn trẻ để sửa");
+        else{
+            try {
+                phuHuynhModel= phuHuynhService.getPHByMa(txtMaPH2.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            phuHuynhModel.setTencha(txtTenCha.getText());
+            phuHuynhModel.setTenme(txtTenMe.getText());
+            phuHuynhModel.setNghecha(txtNgheCha.getText());
+            phuHuynhModel.setNgheme(txtNgheMe.getText());
+            phuHuynhModel.setSdt(txtSDT.getText());
+            phuHuynhModel.setDiachi(txtDiachi.getText());
+            phuHuynhService.updatePH(phuHuynhModel);
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tablePH2.getModel();
+        defaultTableModel.setRowCount(0);
+        List<PhuHuynhModel> phs= phuHuynhService.getPH();
+        for(PhuHuynhModel ph : phs){
+            defaultTableModel.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
+        }
+        JOptionPane.showMessageDialog(rbTen, "Thêm thành công");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tablePH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePH2MouseClicked
+        // TODO add your handling code here:
+        int row = tablePH2.getSelectedRow();
+        String maph= tablePH2.getValueAt(row, 0).toString();
+        try {
+            PhuHuynhModel ph= phuHuynhService.getPHByMa(maph);
+            txtMaPH2.setText(ph.getMaph());
+            txtTenCha.setText(ph.getTencha());
+            txtTenMe.setText(ph.getTenme());
+            txtNgheCha.setText(ph.getNghecha());
+            txtNgheMe.setText(ph.getNgheme());
+            txtSDT.setText(ph.getSdt());
+            txtDiachi.setText(ph.getDiachi());
+        } catch (IOException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_tablePH2MouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        int row = tablePH2.getSelectedRow();
+       if(row == -1)
+       {
+           JOptionPane.showMessageDialog(TrePanel.this,"Vui lòng chọn PH để xóa", "Lỗi",JOptionPane.ERROR_MESSAGE);
+       }
+       else{
+           int confirm = JOptionPane.showConfirmDialog(TrePanel.this,"Bạn có chắc muốn xóa không ?");
+           if (confirm == JOptionPane.YES_OPTION)
+           {
+               String maph = (String) tablePH2.getValueAt(row, 0);
+               phuHuynhService.deletePH(maph);
+          DefaultTableModel defaultTableModel = (DefaultTableModel) tablePH2.getModel();
+        defaultTableModel.setRowCount(0);
+        List<PhuHuynhModel> phs= phuHuynhService.getPH();
+        for(PhuHuynhModel ph : phs){
+            defaultTableModel.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
+        }
+        JOptionPane.showMessageDialog(rbTen, "Xóa thành công");
+           }
+       }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            // TODO add your handling code here:
+            List<PhuHuynhModel> phs= phuHuynhService.searchPHByMa(txtSearchPH.getText());
+             DefaultTableModel defaultTableModel = (DefaultTableModel) tablePH2.getModel();
+        defaultTableModel.setRowCount(0);
+        
+        for(PhuHuynhModel ph : phs){
+            defaultTableModel.addRow(new Object[]{ph.getMaph(),ph.getTencha(),ph.getTenme(),ph.getNghecha(),ph.getNgheme(),ph.getSdt(),ph.getDiachi()});
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbMaPH;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -727,15 +896,15 @@ public class TrePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton rbMa;
     private javax.swing.JRadioButton rbNam;
     private javax.swing.JRadioButton rbNu;
+    private javax.swing.JRadioButton rbTen;
     private javax.swing.JTable tablePH1;
     private javax.swing.JTable tablePH2;
     private javax.swing.JTable tableTre;
