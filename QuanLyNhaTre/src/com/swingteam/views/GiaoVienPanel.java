@@ -16,7 +16,7 @@ public class GiaoVienPanel extends javax.swing.JPanel {
      */
     public GiaoVienPanel() {
         initComponents();
-        //hello
+        //hello 
     }
 
     /**
