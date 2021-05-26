@@ -33,7 +33,8 @@ public class GiaoVienPanel extends javax.swing.JPanel {
     public String sdt = null;
 
     public GiaoVienPanel() {
-        initComponents();
+       initComponents();
+
         bacLuongService = new BacLuongService();
         try {
             List<BacLuongModel> hsbl = bacLuongService.finAll();
