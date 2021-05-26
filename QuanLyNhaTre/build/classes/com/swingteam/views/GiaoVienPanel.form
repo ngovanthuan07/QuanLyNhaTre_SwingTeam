@@ -319,6 +319,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="In danh s&#xe1;ch"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton7">
               <Properties>
