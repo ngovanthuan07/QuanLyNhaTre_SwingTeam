@@ -35,5 +35,26 @@ public class GiaoVienService implements IGiaoVienService{
     public String save(GiaoVienModel giaoVienModel) {
         return iGiaoVienDAO.save(giaoVienModel);
     }
+
+    @Override
+    public boolean findByCMND(String cmnd) {
+        return iGiaoVienDAO.findByCMND(cmnd);
+    }
+
+    @Override
+    public boolean findBySDT(String sdt) {
+        return iGiaoVienDAO.findBySDT(sdt);
+    }
+
+    @Override
+    public void edit(GiaoVienModel giaoVienModel, String maNhanVien, int HeSo) {
+        iGiaoVienDAO.edit(giaoVienModel, maNhanVien,HeSo);
+    }
+
+
+    @Override
+    public List<GiaoVienModel> findAllBacLuong_GiaoVien() {
+       return iGiaoVienDAO.findAllBacLuong_GiaoVien();
+    }
     
 }
