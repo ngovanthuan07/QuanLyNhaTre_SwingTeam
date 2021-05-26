@@ -33,11 +33,8 @@ public class GiaoVienPanel extends javax.swing.JPanel {
     public String sdt = null;
 
     public GiaoVienPanel() {
-        initComponents();
-<<<<<<< HEAD
+       initComponents();
 
-=======
->>>>>>> c48774aa37c3483ebab70ebce152ce68de9dc23e
         bacLuongService = new BacLuongService();
         try {
             List<BacLuongModel> hsbl = bacLuongService.finAll();
@@ -162,10 +159,7 @@ public class GiaoVienPanel extends javax.swing.JPanel {
         txt_tengiaovien_danhsachgiaovien.setText("");
         txt_diachi_danhsachgiaovien.setText("");
         txt_sodienthoai_danhsachgiaovien.setText("");
-<<<<<<< HEAD
-=======
         txt_cmnd_danhsachgiaovien.setText("");
->>>>>>> c48774aa37c3483ebab70ebce152ce68de9dc23e
     }
 
     /**
