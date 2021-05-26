@@ -13,6 +13,16 @@ import java.util.List;
  * @author hungtr
  */
 public interface IGiaoVienService {
-   List<GiaoVienModel> findAll();  
-   String save(GiaoVienModel giaoVienModel);
+
+    List<GiaoVienModel> findAll();
+
+    String save(GiaoVienModel giaoVienModel);
+
+    boolean findByCMND(String cmnd);
+
+    boolean findBySDT(String sdt);
+    
+    void edit(GiaoVienModel giaoVienModel,String maGiaoVien,int HeSo);
+    
+    List<GiaoVienModel> findAllBacLuong_GiaoVien();
 }
