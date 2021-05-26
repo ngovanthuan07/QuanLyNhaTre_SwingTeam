@@ -34,9 +34,6 @@ public class GiaoVienPanel extends javax.swing.JPanel {
 
     public GiaoVienPanel() {
         initComponents();
-<<<<<<< HEAD
-        //hello 
-=======
         bacLuongService = new BacLuongService();
         try {
             List<BacLuongModel> hsbl = bacLuongService.finAll();
@@ -161,11 +158,7 @@ public class GiaoVienPanel extends javax.swing.JPanel {
         txt_tengiaovien_danhsachgiaovien.setText("");
         txt_diachi_danhsachgiaovien.setText("");
         txt_sodienthoai_danhsachgiaovien.setText("");
-<<<<<<< HEAD
         txt_cmnd_danhsachgiaovien.setText("");
-=======
->>>>>>> 9c6639b7ab3977b8d78623a414539043fa6ce6b7
->>>>>>> c4bb68618e87396edd4172028a1f8100818fccc5
     }
 
     /**
