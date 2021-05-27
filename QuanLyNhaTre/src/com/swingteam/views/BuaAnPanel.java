@@ -51,7 +51,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
     static final String PASSWORD="swingteam";
        private String sql="SELECT * FROM QuanLyBuaAn";
     private ChucVuService chucVuService;
-    private DefaultTableModel modelChucVu;
+    private DefaultTableModel modelChucVu,modelOKThuan;
         
     /**
      * Creates new form BuaAnPanel
