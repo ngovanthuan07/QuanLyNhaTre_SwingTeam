@@ -41,4 +41,40 @@ public class SwinTeamConnect {
             return null;
         }
     }
+    public static Connection openConnection() {
+        Connection conn;
+         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databasename=QUANLYNHATRE;"
+                    + "username=sa;password=123456789");
+            return conn;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+         return null;
+    }
+
+    public static void closeAll(Connection con, PreparedStatement pstmt, ResultSet rs) {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUtility.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUtility.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBUtility.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
