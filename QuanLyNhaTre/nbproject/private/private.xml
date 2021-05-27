@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/database/quanlynhatre.sql</file>
             <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/TrangChuPanel.java</file>
-            <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/MainJFrame.java</file>
             <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/BuaAnPanel.java</file>
-            <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/Main/Main.java</file>
-=======
-            <file>file:/C:/Users/ADMIN/Desktop/QlyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/TrePanel.java</file>
->>>>>>> a69030c491e331069cf7fcd4d99e523cc6ef5668
+            <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/NhanVienPanel.java</file>
+            <file>file:/D:/SwingTeam_QuanLyNhaTre/QuanLyNhaTre_SwingTeam/QuanLyNhaTre/src/com/swingteam/views/GiaoVienPanel.java</file>
         </group>
     </open-files>
 </project-private>
