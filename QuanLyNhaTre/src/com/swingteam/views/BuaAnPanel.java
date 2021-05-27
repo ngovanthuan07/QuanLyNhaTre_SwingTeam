@@ -160,7 +160,7 @@ private void Enabled(){
      }
      lb_status.setText("Thêm Thành Công");
      loaddata(sql);
-          
+     loaddata(sql);     
     }
  public void loadcombobox(){
      connection();
