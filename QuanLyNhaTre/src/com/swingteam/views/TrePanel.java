@@ -154,7 +154,7 @@ public class TrePanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255)));
 
         jLabel2.setText("Họ Tên:");
@@ -384,7 +384,7 @@ public class TrePanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255)));
 
         jLabel8.setText("Mã Phụ Huynh:");
@@ -676,10 +676,9 @@ public class TrePanel extends javax.swing.JPanel {
                 Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             treModel.setMatre(txtMatre.getText());
-      treModel.setTentre(txtHoTen.getText());
-//      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        String ngsinh =dateFormat.format(txtNgaysinh.getDate());
-//      treModel.setNgaysinh(ngsinh.toString());
+      treModel.setTentre(txtHoTen.getText());      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+       String ngsinh =dateFormat.format(txtNgaysinh.getDate());
+      treModel.setNgaysinh(ngsinh);
       if(rbNam.isSelected())
           treModel.setGioi(1);
       if(rbNu.isSelected())
