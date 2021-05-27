@@ -501,7 +501,7 @@ public class TrePanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(27, 27, 27))
@@ -720,12 +720,17 @@ public class TrePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+       
+        int count= txtSDT.getText().length();
         if(txtTenCha.getText().isEmpty()||txtTenMe.getText().isEmpty()||txtNgheCha.getText().isEmpty()||txtNgheMe.getText().isEmpty()||txtSDT.getText().isEmpty()
                 ||txtDiachi.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(rbTen, "Phải điền đầy đủ thông tin");
         }
+        else
+            if(count<10||count>10){
+                JOptionPane.showMessageDialog(rbTen, "Số điện thoại phải có 10 số, bạn mới có "+count+" số");
+            }
         else{
             phuHuynhModel.setMaph("");
         phuHuynhModel.setTencha(txtTenCha.getText());

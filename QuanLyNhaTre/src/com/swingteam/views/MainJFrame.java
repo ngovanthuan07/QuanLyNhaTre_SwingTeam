@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 package com.swingteam.views;
-
 import com.swingteam.bean.DanhMucBean;
 import com.swingteam.controller.MovePanelController;
 import java.util.ArrayList;
 import java.util.List;
+import com.swingteam.views.TrangChuPanel;
 
 /**
  *
