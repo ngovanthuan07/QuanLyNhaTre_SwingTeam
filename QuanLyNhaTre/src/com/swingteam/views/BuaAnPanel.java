@@ -6,6 +6,8 @@
 package com.swingteam.views;
 
 import com.swingteam.SQLconnect.SwinTeamConnect;
+import static com.swingteam.SQLconnect.SwinTeamConnect.password;
+import static com.swingteam.SQLconnect.SwinTeamConnect.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,27 +34,26 @@ import com.swingteam.model.NhanVienModel;
 import com.swingteam.service.impl.BacLuongService;
 import com.swingteam.service.impl.ChucVuService;
 import com.swingteam.service.impl.NhanVienService;
+import java.sql.SQLException;
 import java.util.Calendar;
 import static java.util.Calendar.DAY_OF_MONTH;
 import java.util.Date;
 import javax.rmi.CORBA.Util;
 import sun.util.locale.LocaleExtensions;
+
 /**
  *
  * @author ngova
  */
 public class BuaAnPanel extends javax.swing.JPanel {
-      private Connection conn=null, connCheck=null;
-        private ResultSet rs=null, rsCheck=null;
-          private PreparedStatement pst;  
-            static final String JDBC_DRIVER = "net.sourceforge.jtds.jdbc.Driver";
-    static final String DB_URL = "jdbc:jtds:sqlserver://LAPTOP-HKBE154U:1433/QUANLYNHATRE";
-    static final String USER = "sa";
-    static final String PASSWORD="swingteam";
-       private String sql="SELECT * FROM QuanLyBuaAn";
+
+    private Connection conn = null, connCheck = null;
+    private ResultSet rs = null, rsCheck = null;
+    private PreparedStatement pst;
+    private String sql = "SELECT * FROM QuanLyBuaAn";
     private ChucVuService chucVuService;
-    private DefaultTableModel modelChucVu,modelOKThuan;
-        
+    private DefaultTableModel modelChucVu, modelOKThuan;
+
     /**
      * Creates new form BuaAnPanel
      */
@@ -64,25 +65,37 @@ public class BuaAnPanel extends javax.swing.JPanel {
         this.loadlop();
         this.getMcv();
     }
-    public void connection()
-    {
-         try {          
-            conn=DriverManager.getConnection(DB_URL,USER,PASSWORD);
+    
+    public Connection getConnection() throws SQLException {// connect con Ngo Van Thuan
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYNHATRE";
+            return DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            return null;
+        }
+    }
+    
+    public void connection() {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = getConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-public void loaddata(String sql){
-     try{
+
+    public void loaddata(String sql) {
+        try {
             connection();
-            String[] arry={"ID","Ngày Nhập","Ngày Báo Ăn","Số Xuất Ăn","Thực Đơn Sáng","Thực Đơn Trưa","Thực Đơn Chiều","Tổng Chi Phí","Mã Nhân Viên","Mã Giáo Viên"};
-            DefaultTableModel model=new DefaultTableModel(arry,0);
-            
-            pst=conn.prepareStatement(sql);
-            rs=pst.executeQuery(); 
-            
-            while(rs.next()){
-                Vector vector=new Vector();
+            String[] arry = {"ID", "Ngày Nhập", "Ngày Báo Ăn", "Số Xuất Ăn", "Thực Đơn Sáng", "Thực Đơn Trưa", "Thực Đơn Chiều", "Tổng Chi Phí", "Mã Nhân Viên", "Mã Giáo Viên"};
+            DefaultTableModel model = new DefaultTableModel(arry, 0);
+
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Vector vector = new Vector();
                 vector.add(rs.getInt("id_NgayNhap"));
                 vector.add(rs.getString("ngayNhap"));
                 vector.add(rs.getString("ngayBaoAn"));
@@ -96,198 +109,202 @@ public void loaddata(String sql){
                 model.addRow(vector);
             }
             tb_qualybuaan.setModel(model);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-}
-private void Enabled(){
-    cb_nhanvien.setEnabled(true);
-    tf_giachieu.setEnabled(true);
-    tf_giasang.setEnabled(true);
-    cb_lop.setEnabled(true);
-    tf_ngaykethuc.setEnabled(true);
-    tf_thucdonchieu.setEnabled(true);
-    tf_thucdonsang.setEnabled(true);
-    tf_thucdontrua.setEnabled(true);
-    cb_lop.setEnabled(true);
-    cb_chucvu.setEnabled(true);
-}
-  private void Disabled(){
-      cb_lop.setEnabled(false);
-    tf_giachieu.setEnabled(false);
-    tf_giasang.setEnabled(false);
-    cb_nhanvien.setEnabled(false);
-    tf_ngaykethuc.setEnabled(false);
-    tf_thucdonchieu.setEnabled(false);
-    tf_thucdonsang.setEnabled(false);
-    tf_thucdontrua.setEnabled(false);
-    cb_lop.setEnabled(false);
-    cb_chucvu.setEnabled(false);
- 
-  }
-  private void reset()
-  {
-  cb_chucvu.setSelectedItem("");
-  cb_lop.setSelectedItem("");
-  cb_nhanvien.setSelectedItem("");
-  cb_tienhocsinh.setSelectedItem("");
-  tf_giachieu.setText("");
-  tf_giasang.setText("");
-  tf_giatrua.setText("");
-   ((JTextField)tf_ngaykethuc.getDateEditor().getUiComponent()).setText("");
-  ((JTextField)tf_batdau.getDateEditor().getUiComponent()).setText("");
-  tf_thucdonchieu.setText("");
-  tf_thucdonsang.setText("");
-  tf_thucdontrua.setText("");
-   }
+    }
 
- public void addbuaann(){
-    connection();
-     
-     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-     String date_ngayNhap = sdf.format(tf_ngaykethuc.getDate());
-     SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-     String date_ngayBao = sdf.format(tf_batdau.getDate());
-     
-     String  sqlInsert = 
-                     "insert into QuanLyBuaAn(ngayNhap,ngayBaoAn,soXuatAn,thucDonSang,thucDonTrua,thucDonChieu,tongChiPhi,maNhanVien,maGiaoVien) "
-                    + " values(?,?,?,?,?,?,?,?,?)";
-     try {
-          pst = conn.prepareStatement(sqlInsert);        
-          
-         String soXuatAn = "";
-         String xuatAn = lb_xuatan.getText().trim();
-         conn.setAutoCommit(false);
-             for(int i = 0; i < xuatAn.length(); i++){
-             char kyTu = xuatAn.charAt(i);
-             if(kyTu >= 49 && kyTu <= 57)
-             {
-               soXuatAn   += kyTu;             
-             }else break;
-         }
-         
-          int vitriLast = lb_tongtien.getText().lastIndexOf(" ") -1;
-          String tongTien = lb_tongtien.getText().trim().substring(0, vitriLast);
-            pst.setString(1,date_ngayNhap);
+    private void Enabled() {
+        cb_nhanvien.setEnabled(true);
+        tf_giachieu.setEnabled(true);
+        tf_giasang.setEnabled(true);
+        cb_lop.setEnabled(true);
+        tf_ngaykethuc.setEnabled(true);
+        tf_thucdonchieu.setEnabled(true);
+        tf_thucdonsang.setEnabled(true);
+        tf_thucdontrua.setEnabled(true);
+        cb_lop.setEnabled(true);
+        cb_chucvu.setEnabled(true);
+    }
+
+    private void Disabled() {
+        cb_lop.setEnabled(false);
+        tf_giachieu.setEnabled(false);
+        tf_giasang.setEnabled(false);
+        cb_nhanvien.setEnabled(false);
+        tf_ngaykethuc.setEnabled(false);
+        tf_thucdonchieu.setEnabled(false);
+        tf_thucdonsang.setEnabled(false);
+        tf_thucdontrua.setEnabled(false);
+        cb_lop.setEnabled(false);
+        cb_chucvu.setEnabled(false);
+
+    }
+
+    private void reset() {
+        cb_chucvu.setSelectedItem("");
+        cb_lop.setSelectedItem("");
+        cb_nhanvien.setSelectedItem("");
+        cb_tienhocsinh.setSelectedItem("");
+        tf_giachieu.setText("");
+        tf_giasang.setText("");
+        tf_giatrua.setText("");
+        ((JTextField) tf_ngaykethuc.getDateEditor().getUiComponent()).setText("");
+        ((JTextField) tf_batdau.getDateEditor().getUiComponent()).setText("");
+        tf_thucdonchieu.setText("");
+        tf_thucdonsang.setText("");
+        tf_thucdontrua.setText("");
+    }
+
+    public void addbuaann() {
+        connection();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date_ngayNhap = sdf.format(tf_ngaykethuc.getDate());
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        String date_ngayBao = sdf.format(tf_batdau.getDate());
+
+        String sqlInsert
+                = "insert into QuanLyBuaAn(ngayNhap,ngayBaoAn,soXuatAn,thucDonSang,thucDonTrua,thucDonChieu,tongChiPhi,maNhanVien,maGiaoVien) "
+                + " values(?,?,?,?,?,?,?,?,?)";
+        try {
+            pst = conn.prepareStatement(sqlInsert);
+
+            String soXuatAn = "";
+            String xuatAn = lb_xuatan.getText().trim();
+            conn.setAutoCommit(false);
+            for (int i = 0; i < xuatAn.length(); i++) {
+                char kyTu = xuatAn.charAt(i);
+                if (kyTu >= 49 && kyTu <= 57) {
+                    soXuatAn += kyTu;
+                } else {
+                    break;
+                }
+            }
+
+            int vitriLast = lb_tongtien.getText().lastIndexOf(" ") - 1;
+            String tongTien = lb_tongtien.getText().trim().substring(0, vitriLast);
+            pst.setString(1, date_ngayNhap);
             pst.setString(2, date_ngayBao);
             pst.setInt(3, Integer.parseInt(soXuatAn));
             pst.setString(4, tf_thucdonsang.getText());
             pst.setString(5, tf_thucdontrua.getText());
             pst.setString(6, tf_thucdonchieu.getText());
             pst.setLong(7, Long.parseLong(tongTien));
-            pst.setString(8, (String)(cb_nhanvien.getSelectedItem().toString().trim()));
-            pst.setString(9, (String)(cb_chucvu.getSelectedItem().toString().trim()));  
-            
+            pst.setString(8, (String) (cb_nhanvien.getSelectedItem().toString().trim()));
+            pst.setString(9, (String) (cb_chucvu.getSelectedItem().toString().trim()));
+
             pst.executeUpdate();
             conn.commit();
             ThongBao("Them thanh cong", "Thanh cong", 3);
-           
-     } catch (Exception e) {
-         try {
-             conn.rollback();
-         } catch (Exception ex) {
-             System.out.println(ex);
-         }
-     } finally{
-          try {
-              conn.close();
-              pst.close();
-              loaddata(sql);
-         } catch (Exception e) {
-         }
-     }
- }
- public void loadcombobox(){
-     connection();
-       
-       String sqlselect = "Select maNhanVien from NhanVien";
-       try {
-         PreparedStatement pst = conn.prepareStatement(sqlselect);
-         ResultSet rs = pst.executeQuery();
-         cb_nhanvien.removeAllItems();;
-         while(rs.next())
-         {
-             cb_nhanvien.addItem(rs.getString("maNhanVien"));
-             
-         }
-     } catch (Exception e) {
-     }
 
- }
- 
- public void loadten()
- {
-      connection();
-       
-       String sqlchucvu = "";
-       String maTre="";
-       try {
-           PreparedStatement pts1 = null;
-           ResultSet rs1 = null;
-         PreparedStatement pst = conn.prepareStatement("select maTre from TreHocLop where maLop='"+this.getmalop(cb_lop.getSelectedItem().toString())+"'");
-         ResultSet rs = pst.executeQuery();
-         while(rs.next()){
-            maTre = rs.getString("maTre");
-            sqlchucvu = "Select * from Tre where maTre ='"+maTre+"'";
-            pts1 = conn.prepareStatement(sqlchucvu);
-            rs1 = pts1.executeQuery();         
-            while(rs1.next())
-         {
-             cb_tienhocsinh.addItem(rs1.getString("hoTen"));
-             
-         }
-         }                    
-     } catch (Exception e) {
-         e.printStackTrace();
-     }
- }
- public void getMcv(){
-     connection();
-     String select = "select maGiaoVien from GiaoVien ";
-     
-     try {
-         PreparedStatement ps = conn.prepareStatement(select);
-         ResultSet rs1 = ps.executeQuery();
-         cb_chucvu.removeAllItems();
-         while(rs1.next()){
-             
-             cb_chucvu.addItem(rs1.getString("maGiaoVien"));
-         }
-     } catch (Exception e) {
-         e.printStackTrace();
-     }
-     
- } 
- public void loadlop(){
-     connection();
-     
-     try {
-         PreparedStatement ps = conn.prepareStatement("select tenLop from Lop");
-          ResultSet rs1 = ps.executeQuery();
-         
-         while(rs1.next()){
-             cb_lop.addItem(rs1.getString("tenLop"));
-         }
-     } catch (Exception e) {
-         e.printStackTrace();
-     }
- }
- public String getmalop(String tenlop){
-     connection();
-     String malopString ="";
-     try {
-         pst = conn.prepareStatement("select maLop from Lop where tenLop =N'"+tenlop+"'");
-         rs = pst.executeQuery();
-         while(rs.next()){
-             malopString=rs.getString("maLop");
-         }
-     } catch (Exception e) {
-         e.printStackTrace();
-     }
-     return malopString;
- }
- public long ngay(String dateStart, String dateStop){
+        } catch (Exception e) {
+            try {
+                conn.rollback();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        } finally {
+            try {
+                conn.close();
+                pst.close();
+                loaddata(sql);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public void loadcombobox() {
+        connection();
+
+        String sqlselect = "Select maNhanVien from NhanVien";
+        try {
+            PreparedStatement pst = conn.prepareStatement(sqlselect);
+            ResultSet rs = pst.executeQuery();
+            cb_nhanvien.removeAllItems();;
+            while (rs.next()) {
+                cb_nhanvien.addItem(rs.getString("maNhanVien"));
+
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void loadten() {
+        connection();
+
+        String sqlchucvu = "";
+        String maTre = "";
+        try {
+            PreparedStatement pts1 = null;
+            ResultSet rs1 = null;
+            PreparedStatement pst = conn.prepareStatement("select maTre from TreHocLop where maLop='" + this.getmalop(cb_lop.getSelectedItem().toString()) + "'");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                maTre = rs.getString("maTre");
+                sqlchucvu = "Select * from Tre where maTre ='" + maTre + "'";
+                pts1 = conn.prepareStatement(sqlchucvu);
+                rs1 = pts1.executeQuery();
+                while (rs1.next()) {
+                    cb_tienhocsinh.addItem(rs1.getString("hoTen"));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getMcv() {
+        connection();
+        String select = "select maGiaoVien from GiaoVien ";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(select);
+            ResultSet rs1 = ps.executeQuery();
+            cb_chucvu.removeAllItems();
+            while (rs1.next()) {
+
+                cb_chucvu.addItem(rs1.getString("maGiaoVien"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadlop() {
+        connection();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("select tenLop from Lop");
+            ResultSet rs1 = ps.executeQuery();
+
+            while (rs1.next()) {
+                cb_lop.addItem(rs1.getString("tenLop"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getmalop(String tenlop) {
+        connection();
+        String malopString = "";
+        try {
+            pst = conn.prepareStatement("select maLop from Lop where tenLop =N'" + tenlop + "'");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                malopString = rs.getString("maLop");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return malopString;
+    }
+
+    public long ngay(String dateStart, String dateStop) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date d1 = null;
         Date d2 = null;
@@ -296,15 +313,13 @@ private void Enabled(){
             d2 = format.parse(dateStop);
 
             long diff = d2.getTime() - d1.getTime();
-            
+
             long diffDays = diff / (24 * 60 * 60 * 1000);
-            
-            if(diffDays < 0)
-            {
+
+            if (diffDays < 0) {
                 return -1;
             }
-            if(diffDays == 0)
-            {
+            if (diffDays == 0) {
                 return 1;
             }
             return diffDays;
@@ -312,13 +327,13 @@ private void Enabled(){
         } catch (Exception e) {
             return -1;
         }
- }
+    }
+
     public void ThongBao(String noiDungThongBao, String tieuDeThongBao, int icon) {
         JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao,
                 tieuDeThongBao, icon);
-    }      
- 
- 
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -698,33 +713,32 @@ private void Enabled(){
             this.addbuaann();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             reset();
         }
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void tf_batdauKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_batdauKeyTyped
-       
+
     }//GEN-LAST:event_tf_batdauKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");           
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date_batDau = sdf.format(tf_batdau.getDate());
             String date_ketThuc = sdf.format(tf_ngaykethuc.getDate());
             int day = (int) ngay(date_batDau, date_ketThuc);
-            if(day < 0)
-            {
+            if (day < 0) {
                 ThongBao("Ngày nhap > Ngay bao", "Loi", 2);
                 return;
-            }          
-            lb_xuatan.setText(day+" xuất");
-            lb_tongtien.setText(day*60000 + " VNĐ");
+            }
+            lb_xuatan.setText(day + " xuất");
+            lb_tongtien.setText(day * 60000 + " VNĐ");
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
