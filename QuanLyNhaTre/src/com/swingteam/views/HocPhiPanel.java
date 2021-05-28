@@ -104,6 +104,11 @@ public class HocPhiPanel extends javax.swing.JPanel {
 
         printButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/print-131964753156480777.png"))); // NOI18N
         printButton.setText("In hóa đơn");
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
+            }
+        });
 
         tableHP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -401,6 +406,10 @@ public class HocPhiPanel extends javax.swing.JPanel {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_printButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
