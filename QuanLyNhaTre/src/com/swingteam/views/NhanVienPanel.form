@@ -509,6 +509,9 @@
                           </SubComponents>
                         </Container>
                         <Component class="com.toedter.calendar.JDateChooser" name="txtNgaySinh_NhanVien">
+                          <Events>
+                            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="txtNgaySinh_NhanVienAncestorAdded"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
