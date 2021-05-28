@@ -10,7 +10,9 @@ import com.swingteam.service.PhuHuynhService;
 import com.swingteam.service.TreSerVice;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.logging.Level;
@@ -638,6 +640,7 @@ public class TrePanel extends javax.swing.JPanel {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String ngsinh =dateFormat.format(txtNgaysinh.getDate());
         treModel.setNgaysinh(ngsinh);
+            System.out.println(ngsinh);
         if(rbNam.isSelected())
             treModel.setGioi(1);
         if(rbNu.isSelected())
@@ -673,9 +676,16 @@ public class TrePanel extends javax.swing.JPanel {
             rbNam.setSelected(false);
             }
             cbMaPH.setSelectedItem(tre.getMaph());
+            
         } catch (IOException ex) {
             Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) tableTre.getValueAt(row, 2).toString());
+            txtNgaysinh.setDate(date);
+        } catch (ParseException ex) {
             Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
