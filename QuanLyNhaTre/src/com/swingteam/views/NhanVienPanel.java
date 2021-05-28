@@ -1257,7 +1257,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             return;
         }
         if (txtSoDT_NhanVien1.getText().trim().matches("^\\d{10}$") == false) {
-            ThongBao("so cmnd phải 10 còn của bạn là: " + txtSoDT_NhanVien1.getText().length() + " số", "Lỗi", 1);
+            ThongBao("so sdt phải 10 còn của bạn là: " + txtSoDT_NhanVien1.getText().length() + " số", "Lỗi", 1);
             return;
         }
 
@@ -1311,7 +1311,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             nv.setMaBacLuong(cbbHeSoBacLuong_NhanVien.getSelectedItem().toString().trim());
 
             String index = nhanVienService.save(nv);
-            ThongBao("Thêm Thành công", "Thành công", 2);
+            ThongBao("Thêm Thành công", "Thành công", 3);
             nhanVienRender();
         } catch (Exception e) {
             System.out.println(e);
@@ -1384,7 +1384,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             nv.setMaBacLuong(cbbHeSoBacLuong_NhanVien.getSelectedItem().toString().trim());
 
             nhanVienService.edit(nv, maNhanVien);
-            ThongBao("Sửa thành công", "thành công", 2);
+            ThongBao("Sửa thành công", "thành công", 3);
             nhanVienRender();
         } catch (Exception e) {
             System.out.println(e);
@@ -1538,7 +1538,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             newChucVu.setMaChucVu("");
             newChucVu.setTenChucVu(txtTenChucVu_ChucVu.getText());
             String indexChucVu = chucVuService.save(newChucVu);
-            ThongBao("Thành Công", "Thành Công", 2);
+            ThongBao("Thành Công", "Thành Công", 3);
 
             ChucVuRender();
         } catch (Exception e) {
@@ -1583,6 +1583,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void btnBacLuong_QuanLyLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacLuong_QuanLyLuongActionPerformed
         // TODO add your handling code here:
+        if (txtMucLuongCanBan_QuanLyLuong.getText().equals("")) {
+            ThongBao("Bi Trong", "Loi", 2);
+            return;
+        }
+        if (txtMucLuongCanBan_QuanLyLuong.getText().matches("^\\d{0,20}$") == false) {
+            ThongBao("Ban Phai Nhap La So", "Loi", 2);
+            return;
+        }
         try {
             bacLuongService = new BacLuongService();
             BacLuongModel bl = new BacLuongModel();
@@ -1590,7 +1598,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             bl.setHeSoBac(Integer.parseInt(cbbHeSoBac_QuanLyLuong.getSelectedItem().toString()));
             bl.setMucLuongCanBan(Long.parseLong(txtMucLuongCanBan_QuanLyLuong.getText()));
             String index = bacLuongService.save(bl);
-            ThongBao("Thành Công", "Thành Công", 2);
+            ThongBao("Thành Công", "Thành Công", 3);
             renderBacLuong();
         } catch (Exception e) {
             System.out.println(e);
@@ -1676,7 +1684,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 ThongBao("Vui lòng chọn ô để chỉnh sửa", "Lỗi", 2);
                 return;
             }
-
+            if (txtMucLuongCanBan_QuanLyLuong.getText().equals("")) {
+                ThongBao("Bi Trong", "Loi", 2);
+                return;
+            }
+            if (txtMucLuongCanBan_QuanLyLuong.getText().matches("^\\d{0,20}$") == false) {
+                ThongBao("Ban Phai Nhap La So", "Loi", 2);
+                return;
+            }
             BacLuongModel bacluong = new BacLuongModel();
             bacLuongService = new BacLuongService();
 
@@ -1687,11 +1702,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
             bacLuongService.edit(bacluong, bacluong.getMaBacLuong());
             ThongBao("Sửa thành công", "thành công", 3);
             renderBacLuong();
+            clearBacLuong();
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
-            clearBacLuong();
-        }
+        } 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

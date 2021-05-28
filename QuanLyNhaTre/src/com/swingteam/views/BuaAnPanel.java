@@ -56,8 +56,9 @@ public class BuaAnPanel extends javax.swing.JPanel {
     private String sql = "SELECT * FROM QuanLyBuaAn";
     private ChucVuService chucVuService;
     private DefaultTableModel modelChucVu, modelOKThuan;
-     private boolean add=false, change=false;
-    private boolean leapYear=false,Year=false,Month=false,Day=false;
+    private boolean add = false, change = false;
+    private boolean leapYear = false, Year = false, Month = false, Day = false;
+    private boolean check_buaan = false;
 
     /**
      * Creates new form BuaAnPanel
@@ -69,9 +70,9 @@ public class BuaAnPanel extends javax.swing.JPanel {
         this.cb_lop.removeAllItems();
         this.loadlop();
         this.getMcv();
-      
+
     }
-    
+
     public Connection getConnection() throws SQLException {// connect con Ngo Van Thuan
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -81,7 +82,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
             return null;
         }
     }
-    
+
     public void connection() {
         try {
             conn = getConnection();
@@ -89,6 +90,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
+
     public void loaddata(String sql) {
         try {
             connection();
@@ -188,7 +190,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
                 }
             }
 
-            int vitriLast = lb_tongtien.getText().lastIndexOf(" ") ;
+            int vitriLast = lb_tongtien.getText().lastIndexOf(" ");
             String tongTien = lb_tongtien.getText().trim().substring(0, vitriLast);
             pst.setString(2, date_ngayNhap);
             pst.setString(1, date_ngayBao);
@@ -219,7 +221,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public void loadcombobox() {
         connection();
 
@@ -236,6 +238,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
         }
 
     }
+
     public void loadten() {
         connection();
 
@@ -261,32 +264,32 @@ public class BuaAnPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    public void edit_quanlybuaan(){
+
+    public void edit_quanlybuaan() {
         Connection connection = null;
         PreparedStatement statement = null;
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date_ngayNhap = sdf.format(tf_ngaykethuc.getDate());
+        System.out.println(date_ngayNhap);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         String date_ngayBao = sdf2.format(tf_batdau.getDate());
-        
-        String update
-                = "update QuanLyBuaAn set "
-                + "ngayNhap = ?"
-                + ",ngayBaoAn = ?"
-                + ",soXuatAn = ?"
-                + ",thucDonSang = ?"
-                + ",thucDonTrua = ?"
-                + ",thucDonChieu = ?"
-                + ",tongChiPhi = ?"
-                + ",maNhanVien = ?"
-                + ",maGiaoVien = ?"
-                + "where id_NgayNhap = ?";
-        
-               
-        try{
-            connection = getConnection();          
-            statement = connection.prepareStatement(update);                    
+        System.out.println(date_ngayBao);
+
+        String sql = " update QuanLyBuaAn set \n"
+                + "               ngayNhap = ?,\n"
+                + "               ngayBaoAn = ?,\n"
+                + "               soXuatAn = ?,\n"
+                + "               thucDonSang = ?,\n"
+                + "               thucDonTrua = ?,\n"
+                + "               thucDonChieu = ?,\n"
+                + "               tongChiPhi = ?,\n"
+                + "               maNhanVien = ?,\n"
+                + "               maGiaoVien = ?\n"
+                + "               where id_NgayNhap = ?";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             String soXuatAn = "";
             String xuatAn = lb_xuatan.getText().trim();
             connection.setAutoCommit(false);
@@ -298,10 +301,10 @@ public class BuaAnPanel extends javax.swing.JPanel {
                     break;
                 }
             }
-            
+
             int vitriLast = lb_tongtien.getText().lastIndexOf(" ");
-           String tongTien = lb_tongtien.getText().trim().substring(0, vitriLast);           
-            
+            String tongTien = lb_tongtien.getText().trim().substring(0, vitriLast);
+
             statement.setString(2, date_ngayNhap);
             statement.setString(1, date_ngayBao);
             statement.setInt(3, Integer.parseInt(soXuatAn));
@@ -309,17 +312,34 @@ public class BuaAnPanel extends javax.swing.JPanel {
             statement.setString(5, tf_thucdontrua.getText());
             statement.setString(6, tf_thucdonchieu.getText());
             statement.setLong(7, Long.parseLong(tongTien));
-            statement.setString(8,  cb_nhanvien.getSelectedItem().toString().trim());
-            statement.setString(9,  cb_chucvu.getSelectedItem().toString().trim());
-            statement.setInt(10, Integer.parseInt(jlb_id_NgayNhap.getText()));                  
+            statement.setString(8, cb_nhanvien.getSelectedItem().toString());
+            statement.setString(9, cb_chucvu.getSelectedItem().toString());
+            statement.setInt(10, Integer.parseInt(jlb_id_NgayNhap.getText()));
             statement.executeUpdate();
-             connection.commit();                      
+            connection.commit();
+            ThongBao("Sua thanh cong", "Thanh cong", 3);
         } catch (Exception e) {
-            ThongBao("Them thanh cong", "Thanh cong", 3);         
-            loaddata(sql);
+            try {              
+                connection.rollback();
+                loaddata(sql);
+            } catch (Exception e3) {
+                System.out.println(e3);
+            }
+
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
         }
     }
-    
+
     public void getMcv() {
         connection();
         String select = "select maGiaoVien from GiaoVien ";
@@ -397,6 +417,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao,
                 tieuDeThongBao, icon);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -787,12 +808,12 @@ public class BuaAnPanel extends javax.swing.JPanel {
         Connection connection = null;
         PreparedStatement statement = null;
         String deletel
-        = "delete QuanLyBuaAn where id_NgayNhap = ?";
+                = "delete QuanLyBuaAn where id_NgayNhap = ?";
 
         try {
             connection = getConnection();
 
-            statement = connection.prepareStatement(deletel,Statement.RETURN_GENERATED_KEYS);
+            statement = connection.prepareStatement(deletel, Statement.RETURN_GENERATED_KEYS);
 
             connection.setAutoCommit(false);
 
@@ -821,22 +842,33 @@ public class BuaAnPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_deletelActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-       edit_quanlybuaan();
-        loaddata(sql);
+        if (check_buaan == true) {
+            check_buaan = false;
+            edit_quanlybuaan();
+            loaddata(sql);
+        } else {
+            ThongBao("Vui lòng tính số xuất ăn", "Loi", 2);
+        }
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        try {
-            this.addbuaann();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            reset();
+        if (check_buaan == true) {
+            check_buaan = false;
+            try {
+                this.addbuaann();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                reset();
+            }
+        } else {
+            ThongBao("Vui lòng tính số xuất ăn", "Loi", 2);
         }
+
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        check_buaan = true;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date_batDau = sdf.format(tf_batdau.getDate());
@@ -870,7 +902,7 @@ public class BuaAnPanel extends javax.swing.JPanel {
 
         int click = tb_qualybuaan.getSelectedRow();
 
-        jlb_id_NgayNhap.setText( tb_qualybuaan.getValueAt(click, 0).toString());
+        jlb_id_NgayNhap.setText(tb_qualybuaan.getValueAt(click, 0).toString());
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) tb_qualybuaan.getValueAt(click, 1).toString());
             tf_batdau.setDate(date);
@@ -884,12 +916,11 @@ public class BuaAnPanel extends javax.swing.JPanel {
         tf_thucdontrua.setText(tb_qualybuaan.getValueAt(click, 5).toString());
         tf_thucdonchieu.setText(tb_qualybuaan.getValueAt(click, 6).toString());
         lb_tongtien.setText(tb_qualybuaan.getValueAt(click, 7).toString());
-        setSelectedCombobox(tb_qualybuaan.getValueAt(click, 8).toString(),cb_nhanvien);
-        setSelectedCombobox(tb_qualybuaan.getValueAt(click, 9).toString(),cb_chucvu);
+        setSelectedCombobox(tb_qualybuaan.getValueAt(click, 8).toString(), cb_nhanvien);
+        setSelectedCombobox(tb_qualybuaan.getValueAt(click, 9).toString(), cb_chucvu);
         btn_deletel.setEnabled(true);
         btn_edit.setEnabled(true);
     }//GEN-LAST:event_tb_qualybuaanMouseClicked
-
 
     public void setSelectedCombobox(String cbbselected, JComboBox cbb) {
         for (int i = 0; i < cbb.getItemCount(); i++) {
