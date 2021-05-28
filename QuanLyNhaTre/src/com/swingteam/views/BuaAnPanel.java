@@ -84,7 +84,6 @@ public class BuaAnPanel extends javax.swing.JPanel {
     
     public void connection() {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = getConnection();
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -5,6 +5,11 @@
  */
 package com.swingteam.views;
 
+import com.swingteam.model.HocPhiModel;
+import com.swingteam.service.HocPhiService;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ngova
@@ -14,8 +19,26 @@ public class HocPhiPanel extends javax.swing.JPanel {
     /**
      * Creates new form HocPhiPanel
      */
+    HocPhiService hocPhiService;
+    HocPhiModel hocPhiModel;
+    DefaultTableModel deTableModel;
     public HocPhiPanel() {
         initComponents();
+        hocPhiService= new HocPhiService();
+        hocPhiModel= new HocPhiModel();
+        deTableModel= new DefaultTableModel();
+        tableHP.setModel(deTableModel);
+        deTableModel.addColumn("Mã học phí");
+        deTableModel.addColumn("Ngày thu");
+        deTableModel.addColumn("Tiền học phí");
+        deTableModel.addColumn("Tiền đã đóng");
+        deTableModel.addColumn("Tình trạng");
+        deTableModel.addColumn("Mã trẻ");
+        deTableModel.addColumn("Mã phụ huynh");
+        List<HocPhiModel> hPhi= hocPhiService.getHocPHi();
+        for(HocPhiModel hocPhi : hPhi){
+            deTableModel.addRow(new Object[]{hocPhi.getMaHP(), hocPhi.getNgayThu(), hocPhi.getTienHP(), hocPhi.getTienDaDong(), hocPhi.getTtrang(), hocPhi.getMaTre(), hocPhi.getMaPH()});
+        }
     }
 
     /**
@@ -70,7 +93,6 @@ public class HocPhiPanel extends javax.swing.JPanel {
         seeButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -318,9 +340,11 @@ public class HocPhiPanel extends javax.swing.JPanel {
         addButton.setBackground(new java.awt.Color(255, 255, 255));
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/add.png"))); // NOI18N
         addButton.setText("Thêm");
-
-        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/swingteam/img/out.png"))); // NOI18N
-        backButton.setText("Quay lại");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -330,8 +354,7 @@ public class HocPhiPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addGap(464, 464, 464)
+                        .addGap(587, 587, 587)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -354,9 +377,7 @@ public class HocPhiPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -377,10 +398,13 @@ public class HocPhiPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenPHActionPerformed
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbKhoi;
     private javax.swing.JComboBox<String> cbbLop;
