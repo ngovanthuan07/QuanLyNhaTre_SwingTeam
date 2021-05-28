@@ -11,6 +11,7 @@ import com.swingteam.model.NhanVienModel;
 import com.swingteam.service.impl.BacLuongService;
 import com.swingteam.service.impl.ChucVuService;
 import com.swingteam.service.impl.NhanVienService;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -1393,13 +1396,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSua_NhanVien1ActionPerformed
 
     private void txtTimKiem_NhanVien1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiem_NhanVien1KeyPressed
-//        char c = evt.getKeyChar();
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            modelNhanVien = (DefaultTableModel) tblNhanVien_NhanVien.getModel();
-//            String search = txtTimKiem_NhanVien.getText().toString();
-//            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modelNhanVien);
-//            tblNhanVien_NhanVien.setRowSorter(tr);
-//            tr.setRowFilter(RowFilter.regexFilter(search));
+        char c = evt.getKeyChar();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultTableModel table = (DefaultTableModel) tblNhanVien_NhanVien.getModel();
+            String search = txtTimKiem_NhanVien1.getText().toLowerCase().trim();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+            tblNhanVien_NhanVien.setRowSorter(tr);
+            tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+        }
 
     }//GEN-LAST:event_txtTimKiem_NhanVien1KeyPressed
 
@@ -1524,6 +1528,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblChucVu_ChucVuMouseClicked
 
     private void btnThem_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_ChucVuActionPerformed
+        if (txtTenChucVu_ChucVu.getText().equals("")) {
+            ThongBao("Bạn nhập bị thiếu", "Lỗi", 2);
+            return;
+        }
         try {
             chucVuService = new ChucVuService();
             ChucVuModel newChucVu = new ChucVuModel();
@@ -1546,6 +1554,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
             int row = tblChucVu_ChucVu.getSelectedRow();
             if (row == -1) {
                 ThongBao("vui lòng chọn vào ô để chỉnh sửa", "lỗi", 2);
+                return;
+            }
+            if (txtTenChucVu_ChucVu.getText().equals("")) {
+                ThongBao("Bạn nhập bị thiếu", "Lỗi", 2);
                 return;
             }
             ChucVuModel cv = new ChucVuModel();
@@ -1691,7 +1703,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 return;
             }
 
-            
             bacLuongService = new BacLuongService();
 
             String maBacLuong = txtMaBacLuong_QuanLyLuong.getText();
