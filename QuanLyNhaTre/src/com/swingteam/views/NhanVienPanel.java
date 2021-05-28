@@ -11,6 +11,7 @@ import com.swingteam.model.NhanVienModel;
 import com.swingteam.service.impl.BacLuongService;
 import com.swingteam.service.impl.ChucVuService;
 import com.swingteam.service.impl.NhanVienService;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -1264,7 +1267,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             return;
         }
         if (txtSoDT_NhanVien1.getText().trim().matches("^\\d{10}$") == false) {
-            ThongBao("so cmnd phải 10 còn của bạn là: " + txtSoDT_NhanVien1.getText().length() + " số", "Lỗi", 1);
+            ThongBao("so sdt phải 10 còn của bạn là: " + txtSoDT_NhanVien1.getText().length() + " số", "Lỗi", 1);
             return;
         }
 
@@ -1318,7 +1321,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             nv.setMaBacLuong(cbbHeSoBacLuong_NhanVien.getSelectedItem().toString().trim());
 
             String index = nhanVienService.save(nv);
-            ThongBao("Thêm Thành công", "Thành công", 2);
+            ThongBao("Thêm Thành công", "Thành công", 3);
             nhanVienRender();
         } catch (Exception e) {
             System.out.println(e);
@@ -1391,7 +1394,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             nv.setMaBacLuong(cbbHeSoBacLuong_NhanVien.getSelectedItem().toString().trim());
 
             nhanVienService.edit(nv, maNhanVien);
-            ThongBao("Sửa thành công", "thành công", 2);
+            ThongBao("Sửa thành công", "thành công", 3);
             nhanVienRender();
         } catch (Exception e) {
             System.out.println(e);
@@ -1403,13 +1406,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSua_NhanVien1ActionPerformed
 
     private void txtTimKiem_NhanVien1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiem_NhanVien1KeyPressed
-//        char c = evt.getKeyChar();
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            modelNhanVien = (DefaultTableModel) tblNhanVien_NhanVien.getModel();
-//            String search = txtTimKiem_NhanVien.getText().toString();
-//            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(modelNhanVien);
-//            tblNhanVien_NhanVien.setRowSorter(tr);
-//            tr.setRowFilter(RowFilter.regexFilter(search));
+        char c = evt.getKeyChar();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultTableModel table = (DefaultTableModel) tblNhanVien_NhanVien.getModel();
+            String search = txtTimKiem_NhanVien1.getText().toLowerCase().trim();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+            tblNhanVien_NhanVien.setRowSorter(tr);
+            tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+        }
 
     }//GEN-LAST:event_txtTimKiem_NhanVien1KeyPressed
 
@@ -1534,13 +1538,17 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblChucVu_ChucVuMouseClicked
 
     private void btnThem_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem_ChucVuActionPerformed
+        if (txtTenChucVu_ChucVu.getText().equals("")) {
+            ThongBao("Bạn nhập bị thiếu", "Lỗi", 2);
+            return;
+        }
         try {
             chucVuService = new ChucVuService();
             ChucVuModel newChucVu = new ChucVuModel();
             newChucVu.setMaChucVu("");
             newChucVu.setTenChucVu(txtTenChucVu_ChucVu.getText());
             String indexChucVu = chucVuService.save(newChucVu);
-            ThongBao("Thành Công", "Thành Công", 2);
+            ThongBao("Thành Công", "Thành Công", 3);
 
             ChucVuRender();
         } catch (Exception e) {
@@ -1556,6 +1564,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
             int row = tblChucVu_ChucVu.getSelectedRow();
             if (row == -1) {
                 ThongBao("vui lòng chọn vào ô để chỉnh sửa", "lỗi", 2);
+                return;
+            }
+            if (txtTenChucVu_ChucVu.getText().equals("")) {
+                ThongBao("Bạn nhập bị thiếu", "Lỗi", 2);
                 return;
             }
             ChucVuModel cv = new ChucVuModel();
@@ -1581,6 +1593,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void btnBacLuong_QuanLyLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBacLuong_QuanLyLuongActionPerformed
         // TODO add your handling code here:
+        if (txtMucLuongCanBan_QuanLyLuong.getText().equals("")) {
+            ThongBao("Bi Trong", "Loi", 2);
+            return;
+        }
+        if (txtMucLuongCanBan_QuanLyLuong.getText().matches("^\\d{0,20}$") == false) {
+            ThongBao("Ban Phai Nhap La So", "Loi", 2);
+            return;
+        }
         try {
             bacLuongService = new BacLuongService();
             BacLuongModel bl = new BacLuongModel();
@@ -1588,7 +1608,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             bl.setHeSoBac(Integer.parseInt(cbbHeSoBac_QuanLyLuong.getSelectedItem().toString()));
             bl.setMucLuongCanBan(Long.parseLong(txtMucLuongCanBan_QuanLyLuong.getText()));
             String index = bacLuongService.save(bl);
-            ThongBao("Thành Công", "Thành Công", 2);
+            ThongBao("Thành Công", "Thành Công", 3);
             renderBacLuong();
         } catch (Exception e) {
             System.out.println(e);
@@ -1674,7 +1694,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 ThongBao("Vui lòng chọn ô để chỉnh sửa", "Lỗi", 2);
                 return;
             }
-
+            if (txtMucLuongCanBan_QuanLyLuong.getText().equals("")) {
+                ThongBao("Bi Trong", "Loi", 2);
+                return;
+            }
+            if (txtMucLuongCanBan_QuanLyLuong.getText().matches("^\\d{0,20}$") == false) {
+                ThongBao("Ban Phai Nhap La So", "Loi", 2);
+                return;
+            }
             BacLuongModel bacluong = new BacLuongModel();
             bacLuongService = new BacLuongService();
 
@@ -1685,11 +1712,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
             bacLuongService.edit(bacluong, bacluong.getMaBacLuong());
             ThongBao("Sửa thành công", "thành công", 3);
             renderBacLuong();
+            clearBacLuong();
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
-            clearBacLuong();
-        }
+        } 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1701,7 +1727,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 return;
             }
 
-            
             bacLuongService = new BacLuongService();
 
             String maBacLuong = txtMaBacLuong_QuanLyLuong.getText();
