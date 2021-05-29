@@ -40,7 +40,7 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import static java.util.Calendar.DAY_OF_MONTH;
 import java.util.Date;
-import javax.rmi.CORBA.Util;
+//import javax.rmi.CORBA.Util;
 import javax.swing.table.TableModel;
 import sun.util.locale.LocaleExtensions;
 
@@ -157,8 +157,8 @@ public class BuaAnPanel extends javax.swing.JPanel {
         tf_giachieu.setText("");
         tf_giasang.setText("");
         tf_giatrua.setText("");
-        ((JTextField) tf_ngaykethuc.getDateEditor().getUiComponent()).setText("");
-        ((JTextField) tf_batdau.getDateEditor().getUiComponent()).setText("");
+       // ((JTextField) tf_ngaykethuc.getDateEditor().getUiComponent()).setText("");
+        //((JTextField) tf_batdau.getDateEditor().getUiComponent()).setText("");
         tf_thucdonchieu.setText("");
         tf_thucdonsang.setText("");
         tf_thucdontrua.setText("");
