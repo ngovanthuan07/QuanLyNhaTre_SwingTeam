@@ -12,11 +12,11 @@ package com.swingteam.model;
 public class HocPhiModel {
     private String maHP;
     private String ngayThu;
-    private long tienHP;
-    private long tienDaDong;
+    private Double tienHP;
+    private Double tienDaDong;
     private String ttrang;
     private String maTre;
-    private String MaPH;
+    private String manv;
 
     public void setMaHP(String maHP) {
         this.maHP = maHP;
@@ -26,13 +26,7 @@ public class HocPhiModel {
         this.ngayThu = ngayThu;
     }
 
-    public void setTienHP(long tienHP) {
-        this.tienHP = tienHP;
-    }
-
-    public void setTienDaDong(long tienDaDong) {
-        this.tienDaDong = tienDaDong;
-    }
+    
 
     public void setTtrang(String ttrang) {
         this.ttrang = ttrang;
@@ -42,9 +36,7 @@ public class HocPhiModel {
         this.maTre = maTre;
     }
 
-    public void setMaPH(String MaPH) {
-        this.MaPH = MaPH;
-    }
+   
 
     public String getMaHP() {
         return maHP;
@@ -54,13 +46,23 @@ public class HocPhiModel {
         return ngayThu;
     }
 
-    public long getTienHP() {
+    public Double getTienHP() {
         return tienHP;
     }
 
-    public long getTienDaDong() {
+    public void setTienHP(Double tienHP) {
+        this.tienHP = tienHP;
+    }
+
+    public Double getTienDaDong() {
         return tienDaDong;
     }
+
+    public void setTienDaDong(Double tienDaDong) {
+        this.tienDaDong = tienDaDong;
+    }
+
+   
 
     public String getTtrang() {
         return ttrang;
@@ -70,9 +72,15 @@ public class HocPhiModel {
         return maTre;
     }
 
-    public String getMaPH() {
-        return MaPH;
+    public String getManv() {
+        return manv;
     }
+
+    public void setManv(String manv) {
+        this.manv = manv;
+    }
+
+   
 
 
 }
