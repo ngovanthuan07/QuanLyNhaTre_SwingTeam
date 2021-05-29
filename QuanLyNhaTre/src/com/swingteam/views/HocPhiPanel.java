@@ -353,6 +353,10 @@ public class HocPhiPanel extends javax.swing.JPanel {
       hocPhiModel.setTienDaDong(Double.parseDouble(txtHPDD.getText()));
       hocPhiModel.setMaTre(cbMatre.getSelectedItem().toString());
       hocPhiModel.setManv(cbNV.getSelectedItem().toString());
+      if(rbChuatt.isSelected())
+          hocPhiModel.setTtrang("Chưa thanh toán");
+      if(rbDatt.isSelected())
+          hocPhiModel.setTtrang("Đã thanh toán");
       hocPhiService.updateHocPhi(hocPhiModel);
       deTableModel.setRowCount(0);
          List<HocPhiModel> hPhi= hocPhiService.getHocPHi();
@@ -382,6 +386,17 @@ public class HocPhiPanel extends javax.swing.JPanel {
             String tienda= tableHP.getValueAt(row, 3).toString();
             String matre=   tableHP.getValueAt(row, 5).toString();
             String manv= tableHP.getValueAt(row, 6).toString();
+            String tinhtrang= tableHP.getValueAt(row, 4).toString();
+            if(tinhtrang.equals("Chưa thanh toán"))
+            {
+                rbChuatt.setSelected(true);
+            rbDatt.setSelected(false);
+            }
+            if(tinhtrang.equals("Đã thanh toán"))
+            {
+                rbDatt.setSelected(true);
+                rbChuatt.setSelected(false);
+            }
             txtMaHP.setText(mahp);
             txtHP.setText(tienhp);
             txtHPDD.setText(tienda);
