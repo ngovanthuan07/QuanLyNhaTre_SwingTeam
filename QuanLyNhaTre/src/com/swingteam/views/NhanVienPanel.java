@@ -466,6 +466,16 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        txtNgaySinh_NhanVien.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtNgaySinh_NhanVienAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -1730,6 +1740,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
             clearBacLuong();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtNgaySinh_NhanVienAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtNgaySinh_NhanVienAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgaySinh_NhanVienAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

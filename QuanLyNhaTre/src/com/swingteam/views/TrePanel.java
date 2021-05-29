@@ -714,7 +714,8 @@ public class TrePanel extends javax.swing.JPanel {
                 Logger.getLogger(TrePanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             treModel.setMatre(txtMatre.getText());
-      treModel.setTentre(txtHoTen.getText());      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+      treModel.setTentre(txtHoTen.getText());      
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
        String ngsinh =dateFormat.format(txtNgaysinh.getDate());
       treModel.setNgaysinh(ngsinh);
       if(rbNam.isSelected())

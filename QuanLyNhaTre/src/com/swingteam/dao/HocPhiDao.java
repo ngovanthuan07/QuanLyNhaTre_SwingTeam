@@ -32,13 +32,13 @@ public class HocPhiDao {
             ResultSet rs= preparedStatement.executeQuery();
             while(rs.next()){
                 HocPhiModel hocPhi=new HocPhiModel();
-                hocPhi.setMaHP(rs.getString("MaHocPhi"));
+                hocPhi.setMaHP(rs.getString("soBienLaiThuTien"));
                 hocPhi.setNgayThu(rs.getString("NgayThu"));
-                hocPhi.setTienHP(rs.getLong("TienHocPhi"));
-                hocPhi.setTienDaDong(rs.getLong("TienDaDong"));
+                hocPhi.setTienHP(rs.getDouble("TienHocPhi"));
+                hocPhi.setTienDaDong(rs.getDouble("TienDaDong"));
                 hocPhi.setTtrang(rs.getString("TinhTRang"));
                 hocPhi.setMaTre(rs.getString("Matre"));
-                hocPhi.setMaPH(rs.getString("MaPhuHuynh"));
+                hocPhi.setManv(rs.getString("MANHANVIEN"));
                 hPhi.add(hocPhi);
             }
         } catch (Exception ex) {
@@ -48,16 +48,16 @@ public class HocPhiDao {
     }
     public void addHocPHi(HocPhiModel hPhi){
         Connection connection=SwinTeamConnect.SQLConnect();
-        String sql="SET DATEFORMAT dmy INSERT INTO TreDongHocPhi( soBienLaiThuTien, ngayThu, tienHocPhi, tienDaDong, tinhTrang, maTre, maPhuHuynh) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql="SET DATEFORMAT dmy INSERT INTO TreDongHocPhi( soBienLaiThuTien, ngayThu, tienHocPhi, tienDaDong, tinhTrang, maTre, MANHANVIEN) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement= connection.prepareStatement(sql);
             preparedStatement.setString(1, hPhi.getMaHP());
             preparedStatement.setString(2, hPhi.getNgayThu());
-            preparedStatement.setLong(3, hPhi.getTienHP());
-            preparedStatement.setLong(4, hPhi.getTienDaDong());
+            preparedStatement.setDouble(3, hPhi.getTienHP());
+            preparedStatement.setDouble(4, hPhi.getTienDaDong());
             preparedStatement.setString(5, hPhi.getTtrang());
-            preparedStatement.setString(5, hPhi.getMaTre());
-            preparedStatement.setString(5, hPhi.getMaPH());
+            preparedStatement.setString(6, hPhi.getMaTre());
+            preparedStatement.setString(7, hPhi.getManv());
             int rs = preparedStatement.executeUpdate();
             System.out.println(rs);
         } catch (SQLException ex) {
@@ -71,11 +71,11 @@ public class HocPhiDao {
                
         try {
             PreparedStatement preparedStatement =connection.prepareStatement(sql);      
-            preparedStatement.setString(2, hPhi.getNgayThu());
-            preparedStatement.setLong(3, hPhi.getTienHP());
-            preparedStatement.setLong(4, hPhi.getTienDaDong());
-            preparedStatement.setString(5, hPhi.getTtrang());
-            preparedStatement.setString(1, hPhi.getMaHP());
+            preparedStatement.setString(1, hPhi.getNgayThu());
+            preparedStatement.setDouble(2, hPhi.getTienHP());
+            preparedStatement.setDouble(3, hPhi.getTienDaDong());
+            preparedStatement.setString(4, hPhi.getTtrang());
+            preparedStatement.setString(5, hPhi.getMaHP());
             int rs = preparedStatement.executeUpdate();
             System.out.println(rs);
         } catch (SQLException ex) {
@@ -108,13 +108,13 @@ public class HocPhiDao {
             ResultSet rs=preparedStatement.executeQuery();
             if(rs.next()){
                 HocPhiModel hocPhi=new HocPhiModel();
-                hocPhi.setMaHP(rs.getString("MaHocPhi"));
+                hocPhi.setMaHP(rs.getString("soBienLaiThuTien"));
                 hocPhi.setNgayThu(rs.getString("NgayThu"));
-                hocPhi.setTienHP(rs.getLong("TienHocPhi"));
-                hocPhi.setTienDaDong(rs.getLong("TienDaDong"));
+                hocPhi.setTienHP(rs.getDouble("TienHocPhi"));
+                hocPhi.setTienDaDong(rs.getDouble("TienDaDong"));
                 hocPhi.setTtrang(rs.getString("TinhTRang"));
                 hocPhi.setMaTre(rs.getString("Matre"));
-                hocPhi.setMaPH(rs.getString("MaPhuHuynh"));
+                hocPhi.setManv(rs.getString("MANHANVIEN"));
                  return hocPhi;
             }
             
