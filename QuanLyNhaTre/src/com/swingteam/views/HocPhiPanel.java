@@ -5,6 +5,8 @@
  */
 package com.swingteam.views;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.swingteam.model.HocPhiModel;
 import com.swingteam.model.NhanVienModel;
 import com.swingteam.model.TreModel;
@@ -19,9 +21,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.nio.file.Path;
 
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Random;
 /**
  *
  * @author ngova
@@ -339,6 +348,52 @@ public class HocPhiPanel extends javax.swing.JPanel {
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
         // TODO add your handling code here:
+        String path="";
+        JFileChooser j= new  JFileChooser();
+       j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+       int x=j.showSaveDialog(this);
+       if(x==JFileChooser.APPROVE_OPTION){
+           path=j.getSelectedFile().getPath();
+       }
+       Document doc = new Document();
+        try {
+            Random rand = new Random();
+            int ranNum = rand.nextInt(100)+1;
+            PdfWriter.getInstance(doc, new FileOutputStream(path+"hocphi"+ranNum+".pdf"));
+            doc.open();
+            PdfPTable tbl = new PdfPTable(7);
+            tbl.addCell("Mã HP");
+            tbl.addCell("Ngày thu");
+            tbl.addCell("Tiền HP");
+            tbl.addCell("Đã đóng");
+            tbl.addCell("Tình trạng");
+            tbl.addCell("Mã trẻ");
+            tbl.addCell("Mã PH");
+            
+            for(int i=0 ;i< tableHP.getRowCount();i++){
+                String Mahp= tableHP.getValueAt(i, 0).toString();
+                String ngthu= tableHP.getValueAt(i, 1).toString();
+                String tienhp= tableHP.getValueAt(i, 2).toString();
+                String dadong= tableHP.getValueAt(i, 3).toString();
+                String tinhtrang= tableHP.getValueAt(i, 4).toString();
+                String matre= tableHP.getValueAt(i, 5).toString();
+                String maph= tableHP.getValueAt(i, 6).toString();
+                tbl.addCell(Mahp);
+                tbl.addCell(ngthu);
+                tbl.addCell(tienhp);
+                tbl.addCell(dadong);
+                tbl.addCell(tinhtrang);
+                tbl.addCell(matre);
+                tbl.addCell(maph);
+            }
+            doc.add(tbl);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HocPhiPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(HocPhiPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        doc.close();
     }//GEN-LAST:event_printButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
